@@ -1,3 +1,5 @@
+#!python
+
 from tkinter import *
 # Create the main window
 Window =Tk()
