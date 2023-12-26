@@ -1,29 +1,47 @@
-#!python
+#!/usr/bin/python
 
+import sys
 from tkinter import *
 
-# Create the main window
-Window = Tk()
-Window.title("Login Page")
-Window.geometry("800x600")
+class App():
 
-frame = Frame(Window)
-frame.pack()
+    def __init__(self):
+        self.geometry = "600x600"
 
-Label(frame, text="Username:", font=14).grid(row=0, column=0)
-Label(frame, text="Password:", font=14).grid(row=1, column=0)
+    def login(self):
+        # comparar as cardenciais com as guardadas no ficheiro
+        print('Hello login :-)')
 
-username_entry = Entry(frame, width=20, font=14)
-password_entry = Entry(frame, width=20, font=14, show="*")
+    def cardentials(self):
+        frame = Frame(self.window)
+        frame.pack()
 
-username_entry.grid(row=0, column=1, columnspan=2, pady=10)
-password_entry.grid(row=1, column=1, columnspan=2, pady=10)
+        Label(frame, text="Username:").grid(row=0, column=0)
+        Label(frame, text="Password:").grid(row=1, column=0)
 
-login_button = Button(frame, width=10, text="Login", font=10)
-login_button.grid(row=2, column=1)
+        username_entry = Entry(frame)
+        password_entry = Entry(frame, show="*")
 
-signup_button = Button(frame, width=10, text="Sign Up", font=10)
-signup_button.grid(row=2, column=2)
+        username_entry.grid(row=0, column=1)
+        password_entry.grid(row=1, column=1)
 
+        login_button = Button(frame, text="Login", command=self.login)
+        login_button.grid(row=2, column=1)
 
-Window.mainloop()
+    def init(self):
+        self.window = Tk()
+        self.window.title("Login Page")
+        self.window.geometry(self.geometry)
+
+        self.cardentials()
+
+        self.window.mainloop()
+
+def main(args):
+    app = App()
+    app.init()
+
+    return 0
+
+if __name__ == '__main__':
+    sys.exit(main(sys.argv))
