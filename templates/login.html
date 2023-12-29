@@ -1,19 +1,27 @@
 <!doctype html>
 <html>
+
 <head>
     <title>MyFotos - Login</title>
 </head>
 
 <body>
 
-    <form>
+    <form method="post" action="/login">
+        <div class="error"></div>
+        {% if error %}
+        <div class="error">{{ error }}</div>
+        {% endif %}
         <div>
             <label for="#login">Login:</label>
-            <input id="login" type="email" name="login" value="Email" placeholder="Email" required>
+            <input id="login" type="email" name="login" value="{{ login }}" placeholder="Email" required>
         </div>
         <div>
             <label for="#password">Password:</label>
             <input id="password" type="password" name="password" value="" required>
+        </div>
+        <div>
+            <button type="submit">Criar Conta</button>
         </div>
         <span>Se ainda não tem conta registe-se aqui: <a href="/registo">registo</a></span>
     </form>
