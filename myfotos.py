@@ -17,12 +17,14 @@ accounts = {
     "test@example.com": {
         "name": "Teste da Silva",
         "user": "admin",
-        "password": "123456789"
+        "password": "123456789",
+        "online": False
     },
     "petunia@example.com": {
         "name": "Petúnia Dias",
         "user": "user",
-        "password": "987654321"
+        "password": "987654321",
+        "online": False
     }
 }
 
@@ -52,8 +54,8 @@ def login():
 
         if not valid_login(request.form['login'], request.form['password']):
             return render_template('login.html',
-                               login=request.form['login'],
-                               error="Password ou login incorrecto!")
+                    login=request.form['login'],
+                    error="Password ou login incorrecto!")
 
         return f"Bem Vindo {accounts[request.form['login']]["name"]}!"
     
