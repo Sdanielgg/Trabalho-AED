@@ -60,7 +60,7 @@ def login():
     # if method Get
 
     return render_template('login.html',
-                           login='')
+                           login='', error='')
 
 @app.route("/")
 def home():
