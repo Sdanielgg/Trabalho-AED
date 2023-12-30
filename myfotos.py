@@ -13,9 +13,21 @@ import re
 
 app = Flask(__name__)
 
+accounts = {
+    "test@example.com": {
+        "name": "Teste da Silva",
+        "user": "admin",
+        "password": "123456789"
+    },
+    "petunia@example.com": {
+        "name": "Petúnia Dias",
+        "user": "user",
+        "password": "987654321"
+    }
+}
 
 def valid_login(login, password):
-    if login == "test@example.com" and password == "12345678":
+    if login in accounts and accounts[login]["password"] == password:
         return True
 
     return False
@@ -43,7 +55,7 @@ def login():
                                login=request.form['login'],
                                error="Password ou login incorrecto!")
 
-        return "Account Created!"
+        return f"Bem Vindo {accounts[request.form['login']]["name"]}!"
     
     # if method Get
 
