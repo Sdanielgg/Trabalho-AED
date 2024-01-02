@@ -46,13 +46,32 @@ class App():
         return ""
 
     def home(self):
-        left_frame = Frame(self.window, width=200, height=400)
-        left_frame.grid(row=0, column=0, padx=10, pady=5)
 
-        tool_bar = Frame(left_frame, width=180, height=185, bg="green")
-        tool_bar.grid(row=2, column=0, padx=5, pady=5)
+        menu = Menu(self.window)
+        self.window.config(menu=menu)
 
-        Label(left_frame, text="MyFotos").grid(row=1, column=0, padx=5, pady=5)
+        fileMenu = Menu(menu)
+        fileMenu.add_command(label="Novo Album")
+        fileMenu.add_command(label="Importar Album")
+        fileMenu.add_command(label="Exportar Album")
+        fileMenu.add_command(label="Sair", command=self.window.quit)
+        menu.add_cascade(label="Ficheiro", menu=fileMenu)
+
+        editMenu = Menu(menu)
+        editMenu.add_command(label="Desfazer")
+        editMenu.add_command(label="Refazer")
+        menu.add_cascade(label="Editar", menu=editMenu)
+
+        adminMenu = Menu(menu)
+        adminMenu.add_command(label="Gerir Utilizadores")
+        adminMenu.add_command(label="Gerir Categorias")
+        adminMenu.add_command(label="Configurar Notificações")
+        menu.add_cascade(label="Administração", menu=adminMenu)
+
+        albumsMenu = Menu(menu)
+        albumsMenu.add_command(label="Gerir")
+        albumsMenu.add_command(label="Listar")
+        menu.add_cascade(label="Albuns", menu=albumsMenu)
 
 
     def cardentials(self):
@@ -78,7 +97,7 @@ class App():
                 return
             
             frame.destroy()
-            self.home();
+            self.home()
 
         login_button = Button(frame, text="Login", command=login)
         login_button.grid(row=2, column=1)
@@ -87,6 +106,10 @@ class App():
         self.window = Tk()
         self.window.title("Login Page")
         self.window.geometry(self.geometry)
+
+        bg = PhotoImage(file = "./images/background.png")
+        label = Label(self.window, image = bg) 
+        label.place(x = 0, y = 0) 
 
         self.cardentials()
 
