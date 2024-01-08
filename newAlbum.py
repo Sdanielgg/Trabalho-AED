@@ -12,4 +12,4 @@ x = (screenWidth/2) - (appWidth/2)
 y = (screenHeight/2) - (appHeight/2)
 
 newAlbum.geometry(f"{appWidth}x{appHeight}+{int(x)}+{int(y)}")
-newAlbum.mainloop()
+newAlbum.mainloop() 

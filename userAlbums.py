@@ -24,7 +24,7 @@ myAlbums.heading("Description",text="Description")
 
 myAlbums.column("Category",width=140,anchor="center")
 myAlbums.heading("Category",text="Category")
- n 
+
 myAlbums.column("Name", width=140,anchor="center")
 myAlbums.heading("Name",text="Name")
 
