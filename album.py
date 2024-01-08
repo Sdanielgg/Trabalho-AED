@@ -16,7 +16,7 @@ y = (screenHeight/2) - (appHeight/2)
 album.geometry(f"{appWidth}x{appHeight}+{int(x)}+{int(y)}")
 
 #Page Title
-title=Label(album,text="selectedAlbum",font=11)
+title=Label(album,text="selectedAlbum",font=11,bg="#D9D9D9")
 title.place(x=0,y=0)
 
 removeButton=Button(album,text="Remove Photo",font=11,width=20,height=2,bg="#D9D9D9")
