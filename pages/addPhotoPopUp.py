@@ -16,8 +16,8 @@ def display_image(file_path):
 
     aspect_ratio = original_image.width / original_image.height
     
-    target_size = (200, int(200 / aspect_ratio))
-    resized_image = original_image.resize(target_size, Image.LANCZOS)
+    target_size = (300, int(300 / aspect_ratio))
+    resized_image = original_image.resize(target_size, Image.ADAPTIVE)
     
     photo = ImageTk.PhotoImage(resized_image)
     
