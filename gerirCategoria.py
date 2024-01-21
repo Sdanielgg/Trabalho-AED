@@ -48,7 +48,8 @@ class ManageCategoriesPage(tk.Frame):
         newLine = Category +";"+ "\n"
         f = open("files\\categories.txt", "a", encoding="utf-8")
         f.write(newLine)
-        f.close()        
+        f.close()
+        self.tree.insert('', 'end', values=Category)        
     
     def deleteSelected(self):
         selected = self.tree.selection()[0]
