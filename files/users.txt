@@ -1,1 +1,1 @@
-sfad;12;User;not logged;
+sfad;12;User;Logged;
