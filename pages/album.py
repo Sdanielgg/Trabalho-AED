@@ -38,7 +38,6 @@ style.layout("Treeview", [('mystyle.Treeview.treearea', {'sticky': 'nswe'})])
 
 tree.column("Name", width=140,anchor="center")
 tree.heading("Name",text="Name")
-
 tree.column("Description", width=250,anchor="center")
 tree.heading("Description",text="Description")
 tree.column("FileType", width=140,anchor="center")
