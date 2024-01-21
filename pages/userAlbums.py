@@ -1,50 +1,76 @@
-from tkinter import *
 from tkinter import ttk
+import tkinter as tk
+from tkinter import messagebox
 
-album=Tk()  
-album.resizable(0,0)
-album.configure(bg="#D9D9D9")
-screenWidth = album.winfo_screenwidth()
-screenHeight = album.winfo_screenheight()
+class UserAlbumPage(tk.Frame):
+    def __init__(self, master=None):
+        super().__init__(master)
+        self.master = master
+        self.create_widgets()
+        self.load_albums()
 
-appWidth =1000
-appHeight = 600 
+    def load_users(self):
+        f = open("files\\users.txt", "r", encoding="utf-8")
+        lines = f.readlines()
+        f.close()
+        for line in lines:
+            content = line.strip().split(";")
+            if (content[3] == "Logged"):
+                user = content[0]
+                return user
+            else:
+                messagebox.showerror(title="User doesnt exist",message="Something went wrong :|")
+        
+    
+    def load_albums(self):
+        user=self.load_users()
+        f=open("files\\AlbumList.txt","r",encoding="utf-8")
+        lines=f.readlines()
+        f.close()
+        for line in lines:
+            content=line.strip().split(";")
+            if(user==content[0]):
+                self.tree.insert('', 'end', values=(content[1],content[2],content[3]))  
+    
+    def create_widgets(self):
+        self.tree = ttk.Treeview(self, selectmode="browse", columns=("Name","Description","Category"), show="headings", height=20)
+        self.tree.column("Name", width=140,anchor="center")
+        self.tree.heading("Name",text="Name")
+        self.tree.column("Description", width=250,anchor="center")
+        self.tree.heading("Description",text="Description")
+        self.tree.column("Category", width=140,anchor="center")
+        self.tree.heading("Category",text="Category")
+        self.tree.place(x=400,y=100)
+        style = ttk.Style()
+        style.configure("Treeview", highlightthickness=0, bd=0, font=('Calibri', 11)) 
+        style.configure("Treeview.Heading", font=('Comic Sans MS', 13)) 
+        style.layout("Treeview", [('mystyle.Treeview.treearea', {'sticky': 'nswe'})])
+        title=tk.Label(self,text="Make a button here to go back to home",font=11,bg="#D9D9D9")
+        title.place(x=0,y=0)
+        removeButton=tk.Button(self,text="Remove Album",font=11,width=20,height=2,bg="#D9D9D9")
+        removeButton.place(x=110,y=220)
+        addButton=tk.Button(self,text="Add Album",font=11,width=20,height=2,bg="#D9D9D9")
+        addButton.place(x=110,y=320)
+        openButton=tk.Button(self,text="Open Album",font=11,width=20,height=2,bg="#D9D9D9")
+        openButton.place(x=110,y=420) 
 
-x = (screenWidth/2) - (appWidth/2)
-y = (screenHeight/2) - (appHeight/2)
+def main():
+    album = tk.Tk()
+    album.configure(bg="#D9D9D9")
+    album.title("User Management System")
+    appWidth = 1000
+    appHeight = 600 
+    screenWidth = album.winfo_screenwidth()
+    screenHeight = album.winfo_screenheight()
+    x = (screenWidth/2) - (appWidth/2)
+    y = (screenHeight/2) - (appHeight/2)
+    album.geometry(f"{appWidth}x{appHeight}+{int(x)}+{int(y)}")
 
-album.geometry(f"{appWidth}x{appHeight}+{int(x)}+{int(y)}")
+    user_album_page = UserAlbumPage(master=album)
+    user_album_page.pack(expand=True, fill="both")
 
-#Page Title
-title=Label(album,text="Make a button here to go back to home",font=11,bg="#D9D9D9")
-title.place(x=0,y=0)
+    album.mainloop()
 
-removeButton=Button(album,text="Remove Album",font=11,width=20,height=2,bg="#D9D9D9")
-removeButton.place(x=110,y=220)
+if __name__ == "__main__":
+    main()
 
-addButton=Button(album,text="Add Album",font=11,width=20,height=2,bg="#D9D9D9")
-addButton.place(x=110,y=320)
-openButton=Button(album,text="Open Album",font=11,width=20,height=2,bg="#D9D9D9")
-openButton.place(x=110,y=420)
-
-#Tree view de albums
-
-tree = ttk.Treeview(album, selectmode="browse", columns=("Name","Description","FileType"), show="headings", height=20)
-
-style = ttk.Style()
-style.configure("Treeview", highlightthickness=0, bd=0, font=('Calibri', 11)) 
-style.configure("Treeview.Heading", font=('Comic Sans MS', 13)) 
-style.layout("Treeview", [('mystyle.Treeview.treearea', {'sticky': 'nswe'})]) 
-
-tree.column("Name", width=140,anchor="center")
-tree.heading("Name",text="Name")
-tree.column("Description", width=250,anchor="center")
-tree.heading("Description",text="Description")
-tree.column("FileType", width=140,anchor="center")
-tree.heading("FileType",text="FileType")
-tree.place(x=400,y=100)
-
-
-
-
-album.mainloop()

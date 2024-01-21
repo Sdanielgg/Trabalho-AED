@@ -1,1 +1,2 @@
+admin;admin;Admin;unLogged;
 sfad;12;User;Logged;
