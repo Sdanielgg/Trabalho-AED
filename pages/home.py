@@ -1,4 +1,4 @@
-#Barrinha em cima com os diversos caminhos(dashboard, home(para dar referesh), notificações, logout), na parte principal vai ter
+#Barrinha em cima com os diversos caminhos(dashboard, notificações, logout), na parte principal vai ter
 from tkinter import *
 
 home=Tk()

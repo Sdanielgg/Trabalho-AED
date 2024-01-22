@@ -18,8 +18,6 @@ class UserAlbumPage(tk.Frame):
             if (content[3] == "Logged"):
                 user = content[0]
                 return user
-            else:
-                messagebox.showerror(title="User doesnt exist",message="Something went wrong :|")
         
     
     def load_albums(self):
@@ -29,8 +27,24 @@ class UserAlbumPage(tk.Frame):
         f.close()
         for line in lines:
             content=line.strip().split(";")
-            if(user==content[0]):
-                self.tree.insert('', 'end', values=(content[1],content[2],content[3]))  
+            if(user==content[3]):
+                self.tree.insert('', 'end', values=(content[0],content[1],content[2]))
+
+    def deleteSelected(self):
+        selected = self.tree.selection()[0]
+        currentItem = self.tree.focus()
+        name = self.tree.item(currentItem, "values")[0]
+        file_path = "files\\AlbumList.txt"
+        f=open(file_path, "r", encoding="utf-8")
+        lines = f.readlines()
+        new_lines = []
+        for line in lines:
+            content = line.split(";")
+            if content[0] != name:
+                 new_lines.append(line)
+        f=open(file_path, "w", encoding="utf-8")
+        f.writelines(new_lines)
+        self.tree.delete(selected)
     
     def create_widgets(self):
         self.tree = ttk.Treeview(self, selectmode="browse", columns=("Name","Description","Category"), show="headings", height=20)
@@ -47,7 +61,7 @@ class UserAlbumPage(tk.Frame):
         style.layout("Treeview", [('mystyle.Treeview.treearea', {'sticky': 'nswe'})])
         title=tk.Label(self,text="Make a button here to go back to home",font=11,bg="#D9D9D9")
         title.place(x=0,y=0)
-        removeButton=tk.Button(self,text="Remove Album",font=11,width=20,height=2,bg="#D9D9D9")
+        removeButton=tk.Button(self,text="Remove Album",font=11,width=20,height=2,bg="#D9D9D9",command=self.deleteSelected)
         removeButton.place(x=110,y=220)
         addButton=tk.Button(self,text="Add Album",font=11,width=20,height=2,bg="#D9D9D9")
         addButton.place(x=110,y=320)
