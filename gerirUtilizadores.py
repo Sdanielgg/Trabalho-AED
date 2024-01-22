@@ -13,7 +13,7 @@ class ManageUsersPage(tk.Frame):
          f_users=open('files\\users.txt', 'r', encoding='utf-8')
          for line in f_users:
              content = line.strip().split(';')
-             self.tree.insert('', 'end', values=(content[0],content[1]))
+             self.tree.insert('', 'end', values=(content[0],content[2]))
     
     def deleteSelected(self):
         selected = self.tree.selection()[0]

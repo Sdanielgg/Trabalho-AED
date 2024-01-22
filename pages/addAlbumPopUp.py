@@ -37,7 +37,7 @@ def addAlbum():
             return
         
     f.close()
-    newLine= AlbumName+";"+Category +";"+Description+";"+user+";"+ "\n"
+    newLine= AlbumName+";"+Category +";"+Description+";"+user+";"+";"+ "\n"
     f = open("files\\AlbumList.txt", "a", encoding="utf-8")
     f.write(newLine)
     f.close()
