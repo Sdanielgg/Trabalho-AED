@@ -10,7 +10,7 @@ def load_users():
         content=line.strip().split(";")
         if (content[3]=="Logged"):
             user=content[0]
-        return user
+            return user
 
 def load_categories():
     categories = []
@@ -37,7 +37,7 @@ def addAlbum():
             return
         
     f.close()
-    newLine =user+";"+ AlbumName+";"+Category+";"+Description+";"+ "\n"
+    newLine= AlbumName+";"+Category +";"+Description+";"+user+";"+ "\n"
     f = open("files\\AlbumList.txt", "a", encoding="utf-8")
     f.write(newLine)
     f.close()
