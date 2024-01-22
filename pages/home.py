@@ -32,17 +32,19 @@ home.geometry(f"{appWidth}x{appHeight}+{int(x)}+{int(y)}")
 
 #Tree view de albums
 
-tree = ttk.Treeview(home, selectmode="browse", columns=("Name","Category"), show="headings", height=20)
+tree = ttk.Treeview(home, selectmode="browse", columns=("Name","Category","User"), show="headings", height=20)
 
 style = ttk.Style()
 style.configure("Treeview", highlightthickness=0, bd=0, font=('Calibri', 11)) 
 style.configure("Treeview.Heading", font=('Comic Sans MS', 13)) 
 style.layout("Treeview", [('mystyle.Treeview.treearea', {'sticky': 'nswe'})]) 
 
-tree.column("Name", width=250,anchor="center")
+tree.column("Name", width=150,anchor="center")
 tree.heading("Name",text="Name")
-tree.column("Category", width=250,anchor="center")
+tree.column("Category", width=150,anchor="center")
 tree.heading("Category",text="Category")
+tree.column("User", width=150,anchor="center")
+tree.heading("User",text="User")
 tree.place(x=400,y=100)
 
 def button_click():
@@ -90,9 +92,18 @@ def load_categories():
 # Categories
 categories = load_categories()
 value_inside = StringVar()
-value_inside.set("Filtrar")
+value_inside.set("Filter")
 
 genreSelect = OptionMenu(home, value_inside, *categories)
 genreSelect.place(x=101,y=250)
 
+
+def load_albums():
+    f=open("files\\AlbumList.txt","r",encoding="utf-8")
+    lines=f.readlines()
+    f.close()
+    for line in lines:
+        content=line.strip().split(";")
+        tree.insert('', 'end', values=(content[0],content[1],content[3]))
+load_albums()
 home.mainloop()
