@@ -1,7 +1,5 @@
 #Barrinha em cima com os diversos caminhos(dashboard, notificações, logout), na parte principal vai ter
 from tkinter import *
-
-import tkinter as tk
 from tkinter import ttk
 
 home=Tk()
@@ -17,12 +15,10 @@ y = (screenHeight/2) - (appHeight/2)
 home.geometry(f"{appWidth}x{appHeight}+{int(x)}+{int(y)}")
 home.title("Home")
 home.resizable(0,0)
-
-album=Tk()  
-album.resizable(0,0)
-album.configure(bg="#D9D9D9")
-screenWidth = album.winfo_screenwidth()
-screenHeight = album.winfo_screenheight()
+home.resizable(0,0)
+home.configure(bg="#D9D9D9")
+screenWidth = home.winfo_screenwidth()
+screenHeight = home.winfo_screenheight()
 
 appWidth =1000
 appHeight = 600 
@@ -30,11 +26,11 @@ appHeight = 600
 x = (screenWidth/2) - (appWidth/2)
 y = (screenHeight/2) - (appHeight/2)
 
-album.geometry(f"{appWidth}x{appHeight}+{int(x)}+{int(y)}")
+home.geometry(f"{appWidth}x{appHeight}+{int(x)}+{int(y)}")
 
 #Tree view de albums
 
-tree = ttk.Treeview(album, selectmode="browse", columns=("Name","Description","FileType"), show="headings", height=20)
+tree = ttk.Treeview(home, selectmode="browse", columns=("Name","Description","FileType"), show="headings", height=20)
 
 style = ttk.Style()
 style.configure("Treeview", highlightthickness=0, bd=0, font=('Calibri', 11)) 
@@ -52,9 +48,33 @@ tree.place(x=400,y=100)
 def button_click():
     print("Button clicked!")
 
-#button
+home.resizable(0,0)
+home.configure(bg="#D9D9D9")
+screenWidth = home.winfo_screenwidth()
+screenHeight = home.winfo_screenheight()
 
-button = Button(home, text="Click Me!", command=button_click)
-button.place(x=450, y=500)
+appWidth =1000
+appHeight = 600 
 
-album.mainloop()
+x = (screenWidth/2) - (appWidth/2)
+y = (screenHeight/2) - (appHeight/2)
+
+home.geometry(f"{appWidth}x{appHeight}+{int(x)}+{int(y)}")
+
+#Page Title
+title=Label(home,text="selectedHome",font=11,bg="#D9D9D9")
+title.place(x=0,y=0)
+
+
+removeButton=Button(home,text="Remove Photo",font=11,width=20,height=2,bg="#D9D9D9")
+removeButton.place(x=101,y=21)
+
+addButton=Button(home,text="Add Photo",font=11,width=20,height=2,bg="#D9D9D9")
+addButton.place(x=401,y=21)
+openButton=Button(home,text="Open Photo",font=11,width=20,height=2,bg="#D9D9D9")
+openButton.place(x=701,y=21)
+
+openButton=Button(home,text="Open Photo",font=11,width=20,height=2,bg="#D9D9D9")
+openButton.place(x=101,y=460)
+
+home.mainloop()

@@ -44,7 +44,4 @@ tree.column("FileType", width=140,anchor="center")
 tree.heading("FileType",text="FileType")
 tree.place(x=400,y=100)
 
-
-
-
 album.mainloop()
