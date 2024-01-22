@@ -27,6 +27,8 @@ x = (screenWidth/2) - (appWidth/2)
 y = (screenHeight/2) - (appHeight/2)
 
 home.geometry(f"{appWidth}x{appHeight}+{int(x)}+{int(y)}")
+#Functions
+
 
 #Tree view de albums
 
@@ -37,10 +39,10 @@ style.configure("Treeview", highlightthickness=0, bd=0, font=('Calibri', 11))
 style.configure("Treeview.Heading", font=('Comic Sans MS', 13)) 
 style.layout("Treeview", [('mystyle.Treeview.treearea', {'sticky': 'nswe'})]) 
 
-tree.column("Name", width=140,anchor="center")
+tree.column("Name", width=250,anchor="center")
 tree.heading("Name",text="Name")
-tree.column("Description", width=250,anchor="center")
-tree.heading("Description",text="Description")
+tree.column("Category", width=250,anchor="center")
+tree.heading("Category",text="Category")
 tree.place(x=400,y=100)
 
 def button_click():
@@ -59,9 +61,6 @@ y = (screenHeight/2) - (appHeight/2)
 
 home.geometry(f"{appWidth}x{appHeight}+{int(x)}+{int(y)}")
 
-#Page Title
-title=Label(home,text="selectedHome",font=11,bg="#D9D9D9")
-title.place(x=0,y=0)
 
 #Buttons
 
