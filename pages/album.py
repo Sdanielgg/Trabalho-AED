@@ -1,9 +1,23 @@
 from tkinter import *
 from tkinter import ttk
 
+#funções
+def line_len():
+    f=open("files\\AlbumList.txt","r",encoding="utf-8")
+    lines=f.readlines()
+    list=[]
+    f.close
+    for line in lines:
+        content=line.strip().split(";")
+        print(len(content))
+def home():
+    album.destroy()
+    import home
+line_len()
+#window
 album=Tk()  
 album.resizable(0,0)
-album.configure(bg="#D9D9D9")
+album.configure(bg="#27544C")
 screenWidth = album.winfo_screenwidth()
 screenHeight = album.winfo_screenheight()
 
@@ -16,15 +30,12 @@ y = (screenHeight/2) - (appHeight/2)
 album.geometry(f"{appWidth}x{appHeight}+{int(x)}+{int(y)}")
 
 #Page Title
-title=Label(album,text="selectedAlbum",font=11,bg="#D9D9D9")
-title.place(x=0,y=0)
+title=Label(album,text="selectedAlbum",font=14,bg="#27544C")
+title.place(x=600,y=60)
 
-removeButton=Button(album,text="Remove Photo",font=11,width=20,height=2,bg="#D9D9D9")
-removeButton.place(x=110,y=220)
-
-addButton=Button(album,text="Add Photo",font=11,width=20,height=2,bg="#D9D9D9")
-addButton.place(x=110,y=320)
-openButton=Button(album,text="Open Photo",font=11,width=20,height=2,bg="#D9D9D9")
+homeButton=Button(album,text="Back",font=11,width=20,height=2,command=home)
+homeButton.place(x=10,y=10)
+openButton=Button(album,text="Open Photo",font=11,width=20,height=2)
 openButton.place(x=110,y=420)
 
 #Tree view de albums
