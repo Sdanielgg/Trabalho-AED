@@ -13,6 +13,7 @@ class SignIn(Frame):
         self.master.destroy()
         import home
     def goToSignUp(self):
+        self.master.destroy()
         import signUp
         
     def logIn(self):
@@ -90,5 +91,5 @@ def main():
 
     signIn.mainloop()
 
-if __name__ == "__main__":
-    main()
+
+main()

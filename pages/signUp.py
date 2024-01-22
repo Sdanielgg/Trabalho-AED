@@ -5,9 +5,9 @@ import tkinter as tk
 #functions
 
 class SignUp(Frame):
-    def __init__(self, master=None):
-        super().__init__(master)
-        self.master = master
+    def __init__(self, up=None):
+        super().__init__(up)
+        self.up = up
         self.create_widgets()
 
     def newUser(self):
@@ -36,7 +36,7 @@ class SignUp(Frame):
         f_users.close()
         
     def signInOpen(self):
-        self.master.destroy()
+        self.up.destroy()
         import signIn
 
     def create_widgets(self):
@@ -87,12 +87,12 @@ def main():
     y = (screenHeight/2) - (appHeight/2)
     signUp.geometry(f"{appWidth}x{appHeight}+{int(x)}+{int(y)}")
 
-    user_signUp_page = SignUp(master=signUp)
+    user_signUp_page = SignUp(up=signUp)
     user_signUp_page.pack(expand=True, fill="both")
 
     signUp.mainloop()
 
 
-if __name__ == "__main__":
-    main()
+
+main()
     
