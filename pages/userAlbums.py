@@ -2,7 +2,7 @@ from tkinter import *
 from tkinter import ttk
 import tkinter as tk
 from tkinter import messagebox
-from addAlbumPopUp import *
+
 
 class UserAlbumPage(tk.Frame):
     def __init__(self, master=None):
@@ -21,9 +21,6 @@ class UserAlbumPage(tk.Frame):
                 user = content[0]
                 return user
             
-
-    
-    
     def load_albums(self):
         user=self.load_users()
         f=open("files\\AlbumList.txt","r",encoding="utf-8")
@@ -71,8 +68,6 @@ class UserAlbumPage(tk.Frame):
         addButton.place(x=110,y=320)
         openButton=tk.Button(self,text="Open Album",font=11,width=20,height=2,bg="#D9D9D9")
         openButton.place(x=110,y=420) 
-    def addAlbumPage():
-        album.destroy()
         
 def main():
     album = tk.Tk()
