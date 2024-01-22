@@ -35,8 +35,8 @@ class SignIn(Frame):
                 self.goToHome()
                 return
             
-            messagebox.showerror(title="Wrong Credentials", message="Either your username or your password doesn't match up.")
-            return
+        messagebox.showerror(title="Wrong Credentials", message="Either your username or your password doesn't match up.")
+        return    
 
     def toggle_password_visibility(self):
         current_state = self.txt_password.cget("show")

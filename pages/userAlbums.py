@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import ttk
 import tkinter as tk
 from tkinter import messagebox
+from SharedFunctions import *
 
 
 class UserAlbumPage(tk.Frame):
@@ -19,16 +20,19 @@ class UserAlbumPage(tk.Frame):
             content = line.strip().split(";")
             if (content[3] == "Logged"):
                 user = content[0]
+                print("hellooo")
                 return user
             
     def load_albums(self):
         user=self.load_users()
+        print(user)
         f=open("files\\AlbumList.txt","r",encoding="utf-8")
         lines=f.readlines()
         f.close()
         for line in lines:
             content=line.strip().split(";")
             if(user==content[3]):
+                print("hasd")
                 self.tree.insert('', 'end', values=(content[0],content[1],content[2]))
 
     def deleteSelected(self):
@@ -46,33 +50,42 @@ class UserAlbumPage(tk.Frame):
         f=open(file_path, "w", encoding="utf-8")
         f.writelines(new_lines)
         self.tree.delete(selected)
+
+    def addAlbumPopUp(self):
+        self.master.destroy()
+        import addAlbumPopUp
     
     def create_widgets(self):
-        self.tree = ttk.Treeview(self, selectmode="browse", columns=("Name","Description","Category"), show="headings", height=20)
-        self.tree.column("Name", width=140,anchor="center")
+        #treeview
+        self.tree = ttk.Treeview(self, selectmode="browse", columns=("Name","Category"), show="headings", height=20)
+        self.tree.column("Name", width=250,anchor="center")
         self.tree.heading("Name",text="Name")
-        self.tree.column("Description", width=250,anchor="center")
-        self.tree.heading("Description",text="Description")
-        self.tree.column("Category", width=140,anchor="center")
+        self.tree.column("Category", width=250,anchor="center")
         self.tree.heading("Category",text="Category")
         self.tree.place(x=400,y=100)
         style = ttk.Style()
         style.configure("Treeview", highlightthickness=0, bd=0, font=('Calibri', 11)) 
         style.configure("Treeview.Heading", font=('Comic Sans MS', 13)) 
         style.layout("Treeview", [('mystyle.Treeview.treearea', {'sticky': 'nswe'})])
-        title=tk.Label(self,text="Make a button here to go back to home",font=11,bg="#D9D9D9")
-        title.place(x=0,y=0)
+
+        #buttons
+        homeButton=Button(self,text="Home",font=11,width=20,height=2,bg="#D9D9D9",command=goToHome)
+        homeButton.place(x=10,y=10)
+
         removeButton=tk.Button(self,text="Remove Album",font=11,width=20,height=2,bg="#D9D9D9",command=self.deleteSelected)
         removeButton.place(x=110,y=220)
-        addButton=tk.Button(self,text="Add Album",font=11,width=20,height=2,bg="#D9D9D9")
+
+        addButton=tk.Button(self,text="Add Album",font=11,width=20,height=2,bg="#D9D9D9",command=self.addAlbumPopUp)
         addButton.place(x=110,y=320)
+
         openButton=tk.Button(self,text="Open Album",font=11,width=20,height=2,bg="#D9D9D9")
         openButton.place(x=110,y=420) 
+
         
 def main():
     album = tk.Tk()
     album.configure(bg="#D9D9D9")
-    album.title("User Management System")
+    album.title("My Albums")
     appWidth = 1000
     appHeight = 600 
     screenWidth = album.winfo_screenwidth()
@@ -88,6 +101,5 @@ def main():
 
 
 
-if __name__ == "__main__":
-    main()
+main()
 
