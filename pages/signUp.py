@@ -34,6 +34,7 @@ class SignUp(Frame):
         f_users = open("files\\users.txt", "a", encoding="utf-8")
         f_users.write(newLine)
         f_users.close()
+        
     def signInOpen(self):
         self.master.destroy()
         import signIn
