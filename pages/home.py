@@ -1,6 +1,8 @@
 #Barrinha em cima com os diversos caminhos(dashboard, home(para dar referesh), notificações, logout), na parte principal vai ter
 from tkinter import *
 
+import tkinter as tk
+
 home=Tk()
 screenWidth = home.winfo_screenwidth()
 screenHeight = home.winfo_screenheight()
@@ -15,12 +17,10 @@ home.geometry(f"{appWidth}x{appHeight}+{int(x)}+{int(y)}")
 home.title("Home")
 home.resizable(0,0)
 
-def clique_do_botao():
+def button_click():
     print("O botão foi clicado!")
 
-window = tk.Tk()
-
-button = tk.Button(janela, text="Clique em mim!", command=clique_do_botao)
+button = tk.Button(text="Click me!", command=button_click)
 
 button.pack()
 
