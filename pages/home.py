@@ -30,7 +30,7 @@ home.geometry(f"{appWidth}x{appHeight}+{int(x)}+{int(y)}")
 
 #Tree view de albums
 
-tree = ttk.Treeview(home, selectmode="browse", columns=("Name","Description","FileType"), show="headings", height=20)
+tree = ttk.Treeview(home, selectmode="browse", columns=("Name","Category"), show="headings", height=20)
 
 style = ttk.Style()
 style.configure("Treeview", highlightthickness=0, bd=0, font=('Calibri', 11)) 
@@ -41,8 +41,6 @@ tree.column("Name", width=140,anchor="center")
 tree.heading("Name",text="Name")
 tree.column("Description", width=250,anchor="center")
 tree.heading("Description",text="Description")
-tree.column("FileType", width=140,anchor="center")
-tree.heading("FileType",text="FileType")
 tree.place(x=400,y=100)
 
 def button_click():
@@ -65,16 +63,37 @@ home.geometry(f"{appWidth}x{appHeight}+{int(x)}+{int(y)}")
 title=Label(home,text="selectedHome",font=11,bg="#D9D9D9")
 title.place(x=0,y=0)
 
+#Buttons
 
-removeButton=Button(home,text="Remove Photo",font=11,width=20,height=2,bg="#D9D9D9")
-removeButton.place(x=101,y=21)
+userButton=Button(home,text="User",font=11,width=20,height=2,bg="#D9D9D9")
+userButton.place(x=101,y=21)
 
-addButton=Button(home,text="Add Photo",font=11,width=20,height=2,bg="#D9D9D9")
-addButton.place(x=401,y=21)
-openButton=Button(home,text="Open Photo",font=11,width=20,height=2,bg="#D9D9D9")
-openButton.place(x=701,y=21)
+myphotosButton=Button(home,text="My Photos",font=11,width=20,height=2,bg="#D9D9D9")
+myphotosButton.place(x=401,y=21)
 
-openButton=Button(home,text="Open Photo",font=11,width=20,height=2,bg="#D9D9D9")
-openButton.place(x=101,y=460)
+logoutButton=Button(home,text="Log Out",font=11,width=20,height=2,bg="#D9D9D9")
+logoutButton.place(x=701,y=21)
+
+openAlbum=Button(home,text="Open Album",font=11,width=20,height=2,bg="#D9D9D9")
+openAlbum.place(x=101,y=460)
+
+def load_categories():
+    categories = []
+    f_categories = open("files\\categories.txt", "r", encoding="utf-8")
+    lines = f_categories.readlines()
+    f_categories.close()
+    for line in lines:
+        content = line.strip().split(";")
+        categories.append(content[0])
+    f_categories.close()
+    return categories
+
+# Categories
+categories = load_categories()
+value_inside = StringVar()
+value_inside.set("Filtrar")
+
+genreSelect = OptionMenu(home, value_inside, *categories)
+genreSelect.place(x=101,y=250)
 
 home.mainloop()

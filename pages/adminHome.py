@@ -14,8 +14,4 @@ home.geometry(f"{appWidth}x{appHeight}+{int(x)}+{int(y)}")
 home.title("Home")
 home.resizable(0,0)
 
-
-
-
-
 home.mainloop()
