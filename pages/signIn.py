@@ -3,6 +3,7 @@ from tkinter import messagebox
 signIn=Tk()
 
 #funções
+
 def logIn():
     username=txt_username.get()
     password=txt_password.get()
@@ -25,6 +26,20 @@ def logIn():
         else:
              messagebox.showerror(title="Wrong Credentials", message="Either your username or your password doesn't match up.")
 
+
+eyeIconNotHidden = PhotoImage(file="images\\eyeIconHide.png")
+eyeIconHidden = PhotoImage(file="images\\eyeIconShow.png")     
+
+def toggle_password_visibility():
+    current_state = txt_password.cget("show")
+    if (current_state=="*"):
+        new_state = ""
+        txt_password.config(show=new_state)
+        showPasswordIcon.config(image=eyeIconNotHidden)
+    else:
+        new_state="*"
+        txt_password.config(show=new_state)
+        showPasswordIcon.config(image=eyeIconHidden)
 
 
 #window
@@ -55,6 +70,9 @@ lbl_password.place(x=110, y=70)
 
 txt_password = Entry(signIn, width=25,font=11, show="*")
 txt_password.place(x=210, y=70)
+
+showPasswordIcon=Button(signIn,image=eyeIconHidden,width=20,height=20,command=toggle_password_visibility)
+showPasswordIcon.place(x=500,y=70)
 
 # Buttons
 btn_signUp = Button(signIn, text="Sign Up", relief="raised", bd=3, width=10, font=11)

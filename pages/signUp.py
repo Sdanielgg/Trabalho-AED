@@ -4,10 +4,14 @@ signUp=Tk()
 
 #functions
 
+# ... (rest of the code)
+
 def newUser():
     Username =txt_username.get()
     Password =txt_password.get()
     PasswordConfirm=txt_passwordConfirm.get()
+    if (len(Password)<8):
+        messagebox.showerror(title="Not enough characters.",message="Your Password needs to have at least 8 characters.")
 
     f_users = open("files\\users.txt", "r", encoding="utf-8")
     lines = f_users.readlines()
