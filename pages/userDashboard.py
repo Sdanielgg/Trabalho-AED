@@ -27,7 +27,7 @@ class User:
         name.place(x=250, y=130)
 
         stats = tk.Label(dashboard, text="Statistics", font=('Calibri', 11))
-        stats.place(x=40, y=310)
+        stats.place(x=50, y=310)
 
         views = tk.Label(dashboard, text="Views:", font=('Calibri', 11))
         views.place(x=50, y=390)
