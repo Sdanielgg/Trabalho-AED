@@ -2,7 +2,6 @@ from tkinter import *
 from tkinter import ttk
 import tkinter as tk
 from tkinter import messagebox
-from SharedFunctions import *
 
 
 class UserAlbumPage(tk.Frame):
@@ -32,7 +31,6 @@ class UserAlbumPage(tk.Frame):
         for line in lines:
             content=line.strip().split(";")
             if(user==content[3]):
-                print("hasd")
                 self.tree.insert('', 'end', values=(content[0],content[1],content[2]))
 
     def deleteSelected(self):
@@ -69,7 +67,7 @@ class UserAlbumPage(tk.Frame):
         style.layout("Treeview", [('mystyle.Treeview.treearea', {'sticky': 'nswe'})])
 
         #buttons
-        homeButton=Button(self,text="Home",font=11,width=20,height=2,bg="#D9D9D9",command=goToHome)
+        homeButton=Button(self,text="Home",font=11,width=20,height=2,bg="#D9D9D9")
         homeButton.place(x=10,y=10)
 
         removeButton=tk.Button(self,text="Remove Album",font=11,width=20,height=2,bg="#D9D9D9",command=self.deleteSelected)

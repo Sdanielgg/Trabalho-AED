@@ -1,4 +1,3 @@
-#Barrinha em cima com os diversos caminhos(dashboard, notificações, logout), na parte principal vai ter
 from tkinter import *
 from tkinter import ttk
 
@@ -29,7 +28,27 @@ y = (screenHeight/2) - (appHeight/2)
 home.geometry(f"{appWidth}x{appHeight}+{int(x)}+{int(y)}")
 #Functions
 
+def logout():
+    f=open("files\\users.txt", "r", encoding="utf-8")
+    lines = f.readlines()
+    for i, line in enumerate(lines):
+        content = line.split(";")
+        content[3] = "NotLogged"
+        lines[i] = ";".join(content)
+    f=open("files\\users.txt", "w", encoding="utf-8") 
+    f.writelines(lines)
 
+
+def load_categories():
+    categories = []
+    f_categories = open("files\\categories.txt", "r", encoding="utf-8")
+    lines = f_categories.readlines()
+    f_categories.close()
+    for line in lines:
+        content = line.strip().split(";")
+        categories.append(content[0])
+    f_categories.close()
+    return categories
 #Tree view de albums
 
 tree = ttk.Treeview(home, selectmode="browse", columns=("Name","Category","User"), show="headings", height=20)
@@ -72,22 +91,13 @@ userButton.place(x=101,y=21)
 myphotosButton=Button(home,text="My Photos",font=11,width=20,height=2,bg="#D9D9D9")
 myphotosButton.place(x=401,y=21)
 
-logoutButton=Button(home,text="Log Out",font=11,width=20,height=2,bg="#D9D9D9")
+logoutButton=Button(home,text="Log Out",font=11,width=20,height=2,bg="#D9D9D9",command=logout)
 logoutButton.place(x=701,y=21)
 
 openAlbum=Button(home,text="Open Album",font=11,width=20,height=2,bg="#D9D9D9")
 openAlbum.place(x=101,y=460)
 
-def load_categories():
-    categories = []
-    f_categories = open("files\\categories.txt", "r", encoding="utf-8")
-    lines = f_categories.readlines()
-    f_categories.close()
-    for line in lines:
-        content = line.strip().split(";")
-        categories.append(content[0])
-    f_categories.close()
-    return categories
+
 
 # Categories
 categories = load_categories()
