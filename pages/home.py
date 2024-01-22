@@ -27,6 +27,9 @@ y = (screenHeight/2) - (appHeight/2)
 
 home.geometry(f"{appWidth}x{appHeight}+{int(x)}+{int(y)}")
 #Functions
+def myAlbums():
+    home.destroy()
+    import userAlbums
 
 def logout():
     f=open("files\\users.txt", "r", encoding="utf-8")
@@ -37,8 +40,16 @@ def logout():
         lines[i] = ";".join(content)
     f=open("files\\users.txt", "w", encoding="utf-8") 
     f.writelines(lines)
+    home.destroy()
+    import signIn
 
-
+def load_albums():
+    f=open("files\\AlbumList.txt","r",encoding="utf-8")
+    lines=f.readlines()
+    f.close()
+    for line in lines:
+        content=line.strip().split(";")
+        tree.insert('', 'end', values=(content[0],content[1],content[3]))
 def load_categories():
     categories = []
     f_categories = open("files\\categories.txt", "r", encoding="utf-8")
@@ -49,8 +60,8 @@ def load_categories():
         categories.append(content[0])
     f_categories.close()
     return categories
-#Tree view de albums
 
+#Tree view de albums
 tree = ttk.Treeview(home, selectmode="browse", columns=("Name","Category","User"), show="headings", height=20)
 
 style = ttk.Style()
@@ -88,7 +99,7 @@ home.geometry(f"{appWidth}x{appHeight}+{int(x)}+{int(y)}")
 userButton=Button(home,text="User",font=11,width=20,height=2,bg="#D9D9D9")
 userButton.place(x=101,y=21)
 
-myphotosButton=Button(home,text="My Photos",font=11,width=20,height=2,bg="#D9D9D9")
+myphotosButton=Button(home,text="My Albums",font=11,width=20,height=2,bg="#D9D9D9",command=myAlbums)
 myphotosButton.place(x=401,y=21)
 
 logoutButton=Button(home,text="Log Out",font=11,width=20,height=2,bg="#D9D9D9",command=logout)
@@ -108,12 +119,6 @@ genreSelect = OptionMenu(home, value_inside, *categories)
 genreSelect.place(x=101,y=250)
 
 
-def load_albums():
-    f=open("files\\AlbumList.txt","r",encoding="utf-8")
-    lines=f.readlines()
-    f.close()
-    for line in lines:
-        content=line.strip().split(";")
-        tree.insert('', 'end', values=(content[0],content[1],content[3]))
+
 load_albums()
 home.mainloop()

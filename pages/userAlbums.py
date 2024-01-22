@@ -52,6 +52,9 @@ class UserAlbumPage(tk.Frame):
     def addAlbumPopUp(self):
         self.master.destroy()
         import addAlbumPopUp
+    def goToHome(self):
+        self.master.destroy()
+        import home
     
     def create_widgets(self):
         #treeview
@@ -67,7 +70,7 @@ class UserAlbumPage(tk.Frame):
         style.layout("Treeview", [('mystyle.Treeview.treearea', {'sticky': 'nswe'})])
 
         #buttons
-        homeButton=Button(self,text="Home",font=11,width=20,height=2,bg="#D9D9D9")
+        homeButton=Button(self,text="Home",font=11,width=20,height=2,bg="#D9D9D9",command=self.goToHome)
         homeButton.place(x=10,y=10)
 
         removeButton=tk.Button(self,text="Remove Album",font=11,width=20,height=2,bg="#D9D9D9",command=self.deleteSelected)

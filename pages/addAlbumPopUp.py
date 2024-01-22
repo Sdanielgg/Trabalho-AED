@@ -41,14 +41,14 @@ class addAlbumPopUp(Frame):
         Description=self.description.get()
         Category=self.value_inside.get()
         f = open("files\\AlbumList.txt", "r", encoding="utf-8")
+    
         lines = f.readlines()
+        f.close()
         for line in lines:
             content=line.strip().split(";")
             if (content[0]==AlbumName):
                 messagebox.showerror(title="Album Name in use",message="That Album Name is already in use, please choose another one!")
                 return
-            
-        f.close()
         newLine= AlbumName+";"+Category +";"+Description+";"+user+";"+ "\n"
         f = open("files\\AlbumList.txt", "a", encoding="utf-8")
         f.write(newLine)
