@@ -22,14 +22,14 @@ class Album(Frame):
         for line in lines:
             content = line.strip().split(";")
             if content[0] == albumname:
-                num_elements = len(content)-4
+                num_elements = len(content)-5
                 description=content[2]
                 description_str=str(description)
                 self.description_textbox.config(state='normal')
                 self.description_textbox.delete(1.0, 'end')
                 self.description_textbox.insert("insert",description_str)
                 for i in range(num_elements):
-                    self.tree.insert('', 'end', values=(content[4 + i]))
+                    self.tree.insert('', 'end', values=(content[5 + i]))
                     
 
     def line_len(self):

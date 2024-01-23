@@ -7,17 +7,17 @@ class Home(Frame):
         self.master = master
         self.create_widgets()
         self.load_albums()
+        self.userLoad()
 #Functions
     def myAlbums(self):
         self.master.destroy()
-        import MyAlbums
-        MyAlbums.main()
+        import myAlbumPhotos
+        myAlbumPhotos.main()
 
     def logout(self):
         f=open("files\\users.txt", "r", encoding="utf-8")
         lines = f.readlines()
         f.close()
-        
         for i, line in enumerate(lines):
             content = line.split(";")
             content[3] = "NotLogged"
@@ -28,7 +28,6 @@ class Home(Frame):
         self.master.destroy()
         import signIn
         signIn.main()
-        
     def userLoad(self):
         f=open("files\\users.txt","r",encoding="utf-8")
         lines=f.readlines()
@@ -126,3 +125,4 @@ def main():
     home_page = Home(master=home)
     home_page.pack(expand=True, fill="both")
     home.mainloop()
+main()

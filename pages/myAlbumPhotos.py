@@ -54,12 +54,15 @@ class AlbumPhotos(tk.Frame):
         del new_lines
         del content
 
-    def addAlbumPopUp(self):
+    def addPhotoPopUp(self):
         self.master.destroy()
-        import addAlbumPopUp
+        import addPhotoPopUp
+        addPhotoPopUp.main()
+    
     def goToHome(self):
         self.master.destroy()
         import home
+        home.main()
     
     def create_widgets(self):
         #treeview
@@ -78,10 +81,10 @@ class AlbumPhotos(tk.Frame):
         homeButton=Button(self,text="Home",font=11,width=20,height=2,bg="#D9D9D9",command=self.goToHome)
         homeButton.place(x=10,y=10)
 
-        removeButton=tk.Button(self,text="Remove Album",font=11,width=20,height=2,bg="#D9D9D9",command=self.deleteSelected)
+        removeButton=tk.Button(self,text="Remove Photo",font=11,width=20,height=2,bg="#D9D9D9",command=self.deleteSelected)
         removeButton.place(x=110,y=220)
 
-        addButton=tk.Button(self,text="Add Album",font=11,width=20,height=2,bg="#D9D9D9",command=self.addAlbumPopUp)
+        addButton=tk.Button(self,text="Add Photo",font=11,width=20,height=2,bg="#D9D9D9",command=self.addPhotoPopUp)
         addButton.place(x=110,y=320)
 
         openButton=tk.Button(self,text="Open Album",font=11,width=20,height=2,bg="#D9D9D9")
@@ -104,5 +107,4 @@ def main():
     user_album_page.pack(expand=True, fill="both")
 
     album.mainloop()
-
 

@@ -30,8 +30,7 @@ class SignIn(Frame):
         f = open("files\\users.txt", "r", encoding="utf-8")
         lines = f.readlines()
         f.close()
-
-        for line in lines:
+        for i, line in enumerate(lines):
             content = line.split(";")
             if (content[0]==username and content[1]==password and content[2]=="Admin"):
                 self.adminSignIn()

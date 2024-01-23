@@ -1,4 +1,4 @@
 admin;admin;Admin;NotLogged;
-joao;ao;User;NotLogged;
+joao;ao;User;Logged;
 John;12345678;User;NotLogged;
 Petunia;12345678;User;NotLogged;
