@@ -23,7 +23,6 @@ class SignIn(Frame):
         self.master.destroy()
         import adminHome
         adminHome.main()
-    
     def logIn(self):
         username = self.txt_username.get()
         password = self.txt_password.get()
@@ -32,7 +31,7 @@ class SignIn(Frame):
         lines = f.readlines()
         f.close()
 
-        for i, line in enumerate(lines):
+        for line in lines:
             content = line.split(";")
             if (content[0]==username and content[1]==password and content[2]=="Admin"):
                 self.adminSignIn()
@@ -74,6 +73,7 @@ class SignIn(Frame):
         self.txt_password = Entry(self, width=25, font=11, show="*")
         self.txt_password.place(x=210, y=70)
 
+        #Show Password
         self.showPasswordIcon = Button(self, image=self.eyeIconHidden, width=20, height=20, command=self.toggle_password_visibility)
         self.showPasswordIcon.place(x=500, y=70)
 

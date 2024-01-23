@@ -28,6 +28,15 @@ class Home(Frame):
         self.master.destroy()
         import signIn
         signIn.main()
+        
+    def userLoad(self):
+        f=open("files\\users.txt","r",encoding="utf-8")
+        lines=f.readlines()
+        f.close()
+        for line in lines:
+            content=line.split(";")
+            if  (content[3]=="Logged"):
+                self.userButton.config(text=content[0])
 
     def load_albums(self):
         f=open("files\\AlbumList.txt","r",encoding="utf-8")
@@ -75,8 +84,8 @@ class Home(Frame):
         self.tree.heading("User",text="User")
         self.tree.place(x=400,y=100)
         #Buttons
-        userButton=Button(self,text="User",font=11,width=20,height=2,bg="#D9D9D9")
-        userButton.place(x=101,y=21)
+        self.userButton=Button(self,text="User",font=11,width=20,height=2,bg="#D9D9D9")
+        self.userButton.place(x=101,y=21)
 
         myphotosButton=Button(self,text="My Albums",font=11,width=20,height=2,bg="#D9D9D9",command=self.myAlbums)
         myphotosButton.place(x=401,y=21)

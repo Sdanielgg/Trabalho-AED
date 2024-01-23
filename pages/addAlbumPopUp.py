@@ -22,8 +22,8 @@ class addAlbumPopUp(Frame):
                 return user
     def goBack(self):
         self.master.destroy()
-        import userAlbums
-        userAlbums.main()
+        import MyAlbums
+        MyAlbums.main()
 
     def load_categories(self):
         categories = []

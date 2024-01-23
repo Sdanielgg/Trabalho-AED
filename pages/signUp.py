@@ -1,6 +1,8 @@
 from tkinter import *
 from tkinter import messagebox
 import tkinter as tk
+import signIn
+
 
 #functions
 
@@ -9,6 +11,7 @@ class SignUp(Frame):
         super().__init__(master)
         self.master = master
         self.create_widgets()
+
 
 
     def newUser(self):
@@ -40,8 +43,7 @@ class SignUp(Frame):
         self.master.destroy()
         import signIn
         signIn.main()
-
-
+    
     def create_widgets(self):
 
         #Username Label/Entry
