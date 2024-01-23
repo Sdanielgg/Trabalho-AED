@@ -1,1 +1,3 @@
-das;None;as;
+das;joao;este album é fixe!;
+das;joao;não é nada >:(;
+das;Petunia;okay!;

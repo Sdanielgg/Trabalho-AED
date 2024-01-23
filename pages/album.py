@@ -10,16 +10,19 @@ class Album(Frame):
         self.create_widgets()
         self.load_album()
         self.load_user()
+        self.loadcomments()
 
     def load_user(self):
         f=open("files\\users.txt","r",encoding="utf-8")
         lines=f.readlines()
         f.close()
+        user=""
         for line in lines:
             content=line.split(";")
             if  (content[3]=="Logged"):
                 user=content[0]
-                return user
+                print(user)
+        
         
     def load_albumName(self):
         f=open("files\\Album.txt","r",encoding="utf-8")
@@ -73,18 +76,6 @@ class Album(Frame):
         
         self.photoCanvas.create_image(0, 0, anchor=NW, image=photo)
         self.photoCanvas.image = photo
-    def comment(self):
-        f=open("files\\Album.txt","r",encoding="utf-8")
-        lines=f.readlines()
-        albumname=lines[0]
-        f.close()
-        text=self.commentEntry.get()
-        user=self.load_album()
-        f=open("files\\comments.txt","w",encoding="utf-8")
-        line=str(albumname)+";"+str(user)+";"+str(text)+";\n"
-        f.write(line)
-        f.close()
-        self.loadcomments()
 
     def loadcomments(self):
         albumname=self.load_albumName()
@@ -95,6 +86,30 @@ class Album(Frame):
             content=line.strip().split(";")
             if content[0]==albumname:
                 self.comments.insert('', 'end', values=(content[1],content[2]))
+
+    def comment(self):
+        f=open("files\\users.txt","r",encoding="utf-8")
+        lines=f.readlines()
+        f.close
+        for line in lines:
+            content=line.strip().split(";")
+            if content[3]=="Logged":
+                user=content[0]
+        f=open("files\\Album.txt","r",encoding="utf-8")
+        lines=f.readlines()
+        albumname=lines[0]
+        f.close()
+        text=self.commentEntry.get()
+
+        print(user)
+        f=open("files\\comments.txt","a",encoding="utf-8")
+        line=str(albumname)+";"+str(user)+";"+str(text)+";\n"
+        f.write(line)
+        f.close()
+        self.comments.delete(*self.comments.get_children())
+        self.loadcomments()
+
+    
 
 
         
