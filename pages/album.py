@@ -2,57 +2,89 @@ from tkinter import *
 from tkinter import ttk
 
 #funções
-def line_len():
-    f=open("files\\AlbumList.txt","r",encoding="utf-8")
-    lines=f.readlines()
-    list=[]
-    f.close
-    for line in lines:
-        content=line.strip().split(";")
-        print(len(content))
-def home():
-    album.destroy()
-    import home
-line_len()
-#window
-album=Tk()  
-album.resizable(0,0)
-album.configure(bg="#27544C")
-screenWidth = album.winfo_screenwidth()
-screenHeight = album.winfo_screenheight()
 
-appWidth =1000
-appHeight = 600 
+class Album(Frame):
+    def __init__(self, master=None):
+        super().__init__(master)
+        self.master = master
+        self.create_widgets()
+        self.load_album()
+    def load_album(self):
+        f=open("files\\AlbumList.txt")
+        albumname="Ferias de natal"
+        lines=f.readlines()
+        f.close
+        for line in lines:
+            content = line.strip().split(";")
+            if content[0] == albumname:
+                num_elements = len(content)-4
+                print(f"The number of elements in the 'content' list is: {num_elements}")
 
-x = (screenWidth/2) - (appWidth/2)
-y = (screenHeight/2) - (appHeight/2)
+                for i in range(num_elements):
+                    self.tree.insert('', 'end', values=(content[4 + i]))
+                    
 
-album.geometry(f"{appWidth}x{appHeight}+{int(x)}+{int(y)}")
+    def line_len(self):
+        f=open("files\\AlbumList.txt","r",encoding="utf-8")
+        lines=f.readlines()
+        f.close
+        for line in lines:
+            content=line.strip().split(";")
+            print(len(content))
+    def home(self):
+        self.master.destroy()
+        import home
+    #window
+    
+    def create_widgets(self):
 
-#Page Title
-title=Label(album,text="selectedAlbum",font=14,bg="#27544C")
-title.place(x=600,y=60)
+        #Page Title
+        page_title=Label(self,text="Album title",font=20)
+        page_title.place(x=500,y=10)
 
-homeButton=Button(album,text="Back",font=11,width=20,height=2,command=home)
-homeButton.place(x=10,y=10)
-openButton=Button(album,text="Open Photo",font=11,width=20,height=2)
-openButton.place(x=110,y=420)
+        tree_title=Label(self,text="Photos",font=14)
+        tree_title.place(x=600,y=60)
 
-#Tree view de albums
+        homeButton=Button(self,text="Back",font=11,width=20,height=2,command=self.home)
+        homeButton.place(x=10,y=10)
+        openButton=Button(self,text="Open Photo",font=11,width=20,height=2)
+        openButton.place(x=110,y=420)
+        
+        #Description
+        description_Label=Label(self,text="Description",font=14)
+        description_Label.place(x=10,y=100)
+        description_textbox = Text(self, font=('Calibri', 11),state='disabled',  width=40,height=10)
+        description_textbox.place(x=10, y=130)
 
-tree = ttk.Treeview(album, selectmode="browse", columns=("Name","Description","FileType"), show="headings", height=20)
 
-style = ttk.Style()
-style.configure("Treeview", highlightthickness=0, bd=0, font=('Calibri', 11)) 
-style.configure("Treeview.Heading", font=('Comic Sans MS', 13)) 
-style.layout("Treeview", [('mystyle.Treeview.treearea', {'sticky': 'nswe'})]) 
 
-tree.column("Name", width=140,anchor="center")
-tree.heading("Name",text="Name")
-tree.column("Description", width=250,anchor="center")
-tree.heading("Description",text="Description")
-tree.column("FileType", width=140,anchor="center")
-tree.heading("FileType",text="FileType")
-tree.place(x=400,y=100)
+        #Tree view de albums
 
-album.mainloop()
+        self.tree = ttk.Treeview(self, selectmode="browse", columns=("PhotoName"), show="headings", height=20)
+
+        style = ttk.Style()
+        style.configure("Treeview", highlightthickness=0, bd=0, font=('Calibri', 14)) 
+        style.configure("Treeview.Heading", font=('Comic Sans MS', 13)) 
+        style.layout("Treeview", [('mystyle.Treeview.treearea', {'sticky': 'nswe'})]) 
+
+        self.tree.column("PhotoName", width=300,anchor="center")
+        self.tree.heading("PhotoName",text="Photo Name")
+        self.tree.place(x=500,y=100)
+def main():
+    album = Tk()
+    album.configure(bg="#27544C")
+    album.title("Album")
+    appWidth = 1000
+    appHeight = 600 
+    screenWidth = album.winfo_screenwidth()
+    screenHeight = album.winfo_screenheight()
+    x = (screenWidth/2) - (appWidth/2)
+    y = (screenHeight/2) - (appHeight/2)
+    album.geometry(f"{appWidth}x{appHeight}+{int(x)}+{int(y)}")
+
+    user_album_page = Album(master=album)
+    user_album_page.pack(expand=True, fill="both")
+    album.mainloop()
+
+main()
+

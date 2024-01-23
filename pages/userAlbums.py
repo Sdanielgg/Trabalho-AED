@@ -20,6 +20,7 @@ class UserAlbumPage(tk.Frame):
             if (content[3] == "Logged"):
                 user = content[0]
                 return user
+        del lines
             
     def load_albums(self):
         user=self.load_users()
@@ -31,6 +32,7 @@ class UserAlbumPage(tk.Frame):
             content=line.strip().split(";")
             if(user==content[3]):
                 self.tree.insert('', 'end', values=(content[0],content[1],content[2]))
+        del lines
 
     def deleteSelected(self):
         selected = self.tree.selection()[0]
@@ -48,6 +50,9 @@ class UserAlbumPage(tk.Frame):
         f.writelines(new_lines)
         f.close()
         self.tree.delete(selected)
+        del lines
+        del new_lines
+        del content
 
     def addAlbumPopUp(self):
         self.master.destroy()

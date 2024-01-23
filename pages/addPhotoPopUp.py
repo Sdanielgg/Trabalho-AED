@@ -58,23 +58,18 @@ photoContainer.pack()
 #Go back Button
 
 goBack=Button(backCon,text="Go Back",width=20,font=11)
-goBack.pack(side=LEFT)
+goBack.pack(side=LEFT,pady=10)
 
 #photo path button
 
 photoPath=Button(container2,text="Photo Path",width=30,font=11,command=open_image)
-photoPath.pack(side=TOP)
+photoPath.pack(side=BOTTOM)
 
-photoCanvas=Canvas(container2,bg="grey",width=200,height=200)
+photoCanvas=Canvas(container2,bg="grey",width=300,height=200)
 photoCanvas.pack(side=TOP)
 
 #photo description (only a few char)
 
-descriptionLabel=Label(container2,text="Description",font=11,bg="grey")
-descriptionLabel.pack(side=TOP)
-
-description=Text(container2,height=5,width=40,border=10,font=11)
-description.pack(side=BOTTOM)
 
 #Add photo to album
 

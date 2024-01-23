@@ -6,7 +6,7 @@ from tkinter import messagebox
 class addAlbumPopUp(Frame):
     def __init__(self, master=None):
         super().__init__(master)
-        self.up = master
+        self.master = master
         self.create_widgets()
         self.load_users()
         self.load_categories()
@@ -26,13 +26,13 @@ class addAlbumPopUp(Frame):
 
     def load_categories(self):
         categories = []
-        f_categories = open("files\\categories.txt", "r", encoding="utf-8")
-        lines = f_categories.readlines()
-        f_categories.close()
+        f = open("files\\categories.txt", "r", encoding="utf-8")
+        lines = f.readlines()
+        f.close()
         for line in lines:
             content = line.strip().split(";")
             categories.append(content[0])
-        f_categories.close()
+        f.close()
         return categories
 
     def addAlbum(self):
