@@ -1,6 +1,6 @@
 from tkinter import *
 from tkinter import ttk
-
+from PIL import Image,ImageTk
 #funções
 
 class Album(Frame):
@@ -18,7 +18,7 @@ class Album(Frame):
         f=open("files\\AlbumList.txt","r",encoding="utf-8")
         lines=f.readlines()
         f.close
-        self.page_title.config(text=albumname)
+        self.page_title.config(text="Album:"+albumname)
         for line in lines:
             content = line.strip().split(";")
             if content[0] == albumname:
@@ -43,9 +43,23 @@ class Album(Frame):
         self.master.destroy()
         import home
         home.main()
-
     #window
-    
+    def display_image(self):
+        selected = self.tree.selection()[0]
+        currentItem = self.tree.focus()
+        file_path = self.tree.item(currentItem, "values")[0]
+        original_image = Image.open(file_path)
+        aspect_ratio = original_image.width / original_image.height
+        
+        target_size = (200, int(200 / aspect_ratio))
+        resized_image = original_image.resize(target_size, Image.ADAPTIVE)
+        
+        photo = ImageTk.PhotoImage(resized_image)
+        
+        self.photoCanvas.config(width=target_size[0], height=target_size[1])
+        
+        self.photoCanvas.create_image(0, 0, anchor=NW, image=photo)
+        self.photoCanvas.image = photo
     def create_widgets(self):
 
         #Page Title
@@ -55,15 +69,16 @@ class Album(Frame):
         tree_title=Label(self,text="Photos",font=14)
         tree_title.place(x=600,y=60)
 
+        #buttons
         homeButton=Button(self,text="Back",font=11,width=20,height=2,command=self.home)
         homeButton.place(x=10,y=10)
-        openButton=Button(self,text="Open Photo",font=11,width=20,height=2)
-        openButton.place(x=110,y=420)
+        openButton=Button(self,text="Open Photo",font=11,width=20,height=2,command=self.display_image)
+        openButton.place(x=60,y=320)
         
         #Description
         description_Label=Label(self,text="Description",font=14)
         description_Label.place(x=10,y=100)
-        self.description_textbox = Text(self, font=('Calibri', 11),state='disabled',  width=40,height=10)
+        self.description_textbox = Text(self, font=('Calibri', 11),state='normal',  width=40,height=10)
         self.description_textbox.place(x=10, y=130)
 
         #Tree view de albums
@@ -77,16 +92,17 @@ class Album(Frame):
 
         self.tree.column("PhotoName", width=300,anchor="center")
         self.tree.heading("PhotoName",text="Photo Name")
-        self.showPasswordIcon = Button(self, image=self.eyeIconHidden, width=20, height=20, command=self.toggle_password_visibility)
-        self.showPasswordIcon.place(x=500, y=70)
+        self.tree.place(x=500,y=100)
 
-
+        #
+        self.photoCanvas=Canvas(self,width=200,height=200,bg="gray")
+        self.photoCanvas.place(x=900,y=200)
 def main():
     album = Tk()
     album.configure(bg="#27544C")
     album.title("Album")
-    appWidth = 1000
-    appHeight = 600 
+    appWidth = 1300
+    appHeight = 700 
     screenWidth = album.winfo_screenwidth()
     screenHeight = album.winfo_screenheight()
     x = (screenWidth/2) - (appWidth/2)
@@ -96,6 +112,4 @@ def main():
     user_album_page = Album(master=album)
     user_album_page.pack(expand=True, fill="both")
     album.mainloop()
-
 main()
-

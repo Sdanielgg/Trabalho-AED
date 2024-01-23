@@ -54,14 +54,14 @@ class ManageCategoriesPage(tk.Frame):
     def deleteSelected(self):
         selected = self.tree.selection()[0]
         currentItem = self.tree.focus()
-        username = self.tree.item(currentItem, "values")[0]
+        category = self.tree.item(currentItem, "values")[0]
         file_path = "files\\categories.txt"
         f=open(file_path, "r", encoding="utf-8")
         lines = f.readlines()
         new_lines = []
         for line in lines:
             content = line.split(";")
-            if content[0] != username:
+            if content[0] != category:
                 new_lines.append(line)
         f=open(file_path, "w", encoding="utf-8")
         f.writelines(new_lines)

@@ -18,6 +18,7 @@ class addPhotoPopUp(Frame):
         self.file_path = filedialog.askopenfilename(title="Select Image File", filetypes=[("Image files", "*.png;*.jpg;*.jpeg")])
         if self.file_path:
             self.display_image(self.file_path)
+
     def add_Image(self):
         print(self.file_path)
         photoPath = self.file_path
@@ -33,12 +34,11 @@ class addPhotoPopUp(Frame):
             content = line.strip().split(";")
             if content and content[0] == AlbumName:
                 if photoPath.strip() in line:
-                    photo_path_exists = False
+                    photo_path_exists = True
                     messagebox.showerror(title="Photo duplicate found!",message="That photo already exists in the album!")
                 else:
                     lines[i] = lines[i].rstrip() + photoPath + ";\n"
         if not photo_path_exists:
-            lines.append(photoPath + "\n")
             f=open("files\\AlbumList.txt", "w", encoding="utf-8") 
             f.writelines(lines)
             f.close

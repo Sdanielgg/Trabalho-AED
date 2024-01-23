@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import ttk
 import tkinter as tk
 from tkinter import messagebox
+from PIL import Image,ImageTk
 
 
 class AlbumPhotos(tk.Frame):
@@ -9,7 +10,7 @@ class AlbumPhotos(tk.Frame):
         super().__init__(master)
         self.master = master
         self.create_widgets()
-        self.load_albums()
+        self.load_album()
 
     def load_users(self):
         f = open("files\\users.txt", "r", encoding="utf-8")
@@ -22,37 +23,44 @@ class AlbumPhotos(tk.Frame):
                 return user
         del lines
             
-    def load_albums(self):
-        user=self.load_users()
-        print(user)
+    def load_album(self):
+        f=open("files\\Album.txt","r",encoding="utf-8")
+        lines=f.readlines()
+        albumname=lines[0]
+        f.close()
         f=open("files\\AlbumList.txt","r",encoding="utf-8")
         lines=f.readlines()
-        f.close()
+        f.close
+        self.page_title.config(text="Album:"+albumname)
         for line in lines:
-            content=line.strip().split(";")
-            if(user==content[3]):
-                self.tree.insert('', 'end', values=(content[0],content[1],content[2]))
-        del lines
+            content = line.strip().split(";")
+            if content[0] == albumname:
+                num_elements = len(content)-5
+                for i in range(num_elements):
+                    self.tree.insert('', 'end', values=(content[5 + i]))
 
     def deleteSelected(self):
         selected = self.tree.selection()[0]
         currentItem = self.tree.focus()
         name = self.tree.item(currentItem, "values")[0]
+        f=open("files\\Album.txt","r",encoding="utf-8")
+        lines=f.readlines()
+        albumname=lines[0]
+        f.close()
         f=open("files\\AlbumList.txt", "r", encoding="utf-8")
         lines = f.readlines()
         f.close()
         new_lines = []
         for line in lines:
-            content = line.split(";")
-            if content[0] != name:
-                 new_lines.append(line)
+            content = line.strip().split(";")
+            if (content[0] == albumname):
+                if name in line:
+                    line = line.replace(name+ ";", "")
+            new_lines.append(line)
         f=open("files\\AlbumList.txt", "w", encoding="utf-8")
         f.writelines(new_lines)
         f.close()
         self.tree.delete(selected)
-        del lines
-        del new_lines
-        del content
 
     def addPhotoPopUp(self):
         self.master.destroy()
@@ -63,20 +71,40 @@ class AlbumPhotos(tk.Frame):
         self.master.destroy()
         import home
         home.main()
-    
-    def create_widgets(self):
-        #treeview
-        self.tree = ttk.Treeview(self, selectmode="browse", columns=("Name","Category"), show="headings", height=20)
-        self.tree.column("Name", width=250,anchor="center")
-        self.tree.heading("Name",text="Name")
-        self.tree.column("Category", width=250,anchor="center")
-        self.tree.heading("Category",text="Category")
-        self.tree.place(x=400,y=100)
-        style = ttk.Style()
-        style.configure("Treeview", highlightthickness=0, bd=0, font=('Calibri', 11)) 
-        style.configure("Treeview.Heading", font=('Comic Sans MS', 13)) 
-        style.layout("Treeview", [('mystyle.Treeview.treearea', {'sticky': 'nswe'})])
 
+    def open_Album(self):
+        currentItem = self.tree.focus()
+        albumName = self.tree.item(currentItem, "values")[0]
+        f=open("files\\Album.txt","w",encoding="utf-8")
+        f.writelines(albumName)
+        f.close()
+
+    def display_image(self):
+        currentItem = self.tree.focus()
+        file_path = self.tree.item(currentItem, "values")[0]
+        original_image = Image.open(file_path)
+        aspect_ratio = original_image.width / original_image.height
+        target_size = (200, int(200 / aspect_ratio))
+        resized_image = original_image.resize(target_size, Image.ADAPTIVE)
+        photo = ImageTk.PhotoImage(resized_image)
+        self.photoCanvas.config(width=target_size[0], height=target_size[1])
+        self.photoCanvas.create_image(0, 0, anchor=NW, image=photo)
+        self.photoCanvas.image = photo
+
+    def create_widgets(self):
+        #page title
+        self.page_title=Label(self,text="",font=14)
+        self.page_title.place(x=300,y=10)
+
+        #treeview
+        self.tree = ttk.Treeview(self, selectmode="browse", columns=("PhotoName"), show="headings", height=20)
+        style = ttk.Style()
+        style.configure("Treeview", highlightthickness=0, bd=0, font=('Calibri', 14)) 
+        style.configure("Treeview.Heading", font=('Comic Sans MS', 13)) 
+        style.layout("Treeview", [('mystyle.Treeview.treearea', {'sticky': 'nswe'})]) 
+        self.tree.column("PhotoName", width=300,anchor="center")
+        self.tree.heading("PhotoName",text="Photo Name")
+        self.tree.place(x=400,y=70)
         #buttons
         homeButton=Button(self,text="Home",font=11,width=20,height=2,bg="#D9D9D9",command=self.goToHome)
         homeButton.place(x=10,y=10)
@@ -87,16 +115,18 @@ class AlbumPhotos(tk.Frame):
         addButton=tk.Button(self,text="Add Photo",font=11,width=20,height=2,bg="#D9D9D9",command=self.addPhotoPopUp)
         addButton.place(x=110,y=320)
 
-        openButton=tk.Button(self,text="Open Album",font=11,width=20,height=2,bg="#D9D9D9")
+        openButton=tk.Button(self,text="Open Photo",font=11,width=20,height=2,bg="#D9D9D9",command=self.display_image)
         openButton.place(x=110,y=420) 
 
-        
+        self.photoCanvas=Canvas(self,width=200,height=200,bg="gray")
+        self.photoCanvas.place(x=900,y=200)
+
 def main():
     album = tk.Tk()
     album.configure(bg="#D9D9D9")
-    album.title("My Albums")
-    appWidth = 1000
-    appHeight = 600 
+    album.title("My Album's Photos")
+    appWidth = 1300
+    appHeight = 700 
     screenWidth = album.winfo_screenwidth()
     screenHeight = album.winfo_screenheight()
     x = (screenWidth/2) - (appWidth/2)
@@ -107,4 +137,4 @@ def main():
     user_album_page.pack(expand=True, fill="both")
 
     album.mainloop()
-
+main()

@@ -31,10 +31,6 @@ class SignIn(Frame):
         f = open("files\\users.txt", "r", encoding="utf-8")
         lines = f.readlines()
         f.close()
-<<<<<<< HEAD
-=======
-
->>>>>>> 587cec652cddedc2e36f8e72a774c561540ad88f
         for i, line in enumerate(lines):
             content = line.split(";")
             if (content[0]==username and content[1]==password and content[2]=="Admin"):

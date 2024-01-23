@@ -34,6 +34,16 @@ class UserAlbumsPage(tk.Frame):
                 self.tree.insert('', 'end', values=(content[0],content[1],content[2]))
         del lines
 
+    def open_Album(self):
+        currentItem = self.tree.focus()
+        albumName = self.tree.item(currentItem, "values")[0]
+        f=open("files\\Album.txt","w",encoding="utf-8")
+        f.writelines(albumName)
+        f.close()
+        self.master.destroy()
+        import myAlbumPhotos
+        myAlbumPhotos.main()
+
     def deleteSelected(self):
         selected = self.tree.selection()[0]
         currentItem = self.tree.focus()
@@ -106,3 +116,4 @@ def main():
     user_album_page.pack(expand=True, fill="both")
 
     albums.mainloop()
+main()

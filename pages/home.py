@@ -1,5 +1,6 @@
 from tkinter import *
 from tkinter import ttk
+from tkinter import messagebox
 
 class Home(Frame):
     def __init__(self, master=None):
@@ -8,34 +9,42 @@ class Home(Frame):
         self.create_widgets()
         self.load_albums()
         self.userLoad()
+        self.loggedChecker()
 #Functions
     def myAlbums(self):
         self.master.destroy()
-<<<<<<< HEAD
         import myAlbumPhotos
         myAlbumPhotos.main()
-=======
-        import userAlbums
->>>>>>> 587cec652cddedc2e36f8e72a774c561540ad88f
-
+    def loggedChecker(self):
+        f=open("files\\users.txt","r",encoding="utf-8")
+        lines=f.readlines()
+        f.close()
+        x=0
+        for line in lines:
+            content=line.strip().split(";")
+            print(content[3])
+            if  (content[3]=="Logged"):
+                x=+1
+        if x==1:
+            return
+        else:
+            messagebox.showerror(title="No user Error",message="No user is currently logged in, please login!")
     def logout(self):
         f=open("files\\users.txt", "r", encoding="utf-8")
+        lines=f.readlines()
         f.close()
-<<<<<<< HEAD
-=======
-        lines = f.readlines()
->>>>>>> 587cec652cddedc2e36f8e72a774c561540ad88f
         for i, line in enumerate(lines):
             content = line.split(";")
             content[3] = "NotLogged"
             lines[i] = ";".join(content)
+
         f=open("files\\users.txt", "w", encoding="utf-8") 
         f.writelines(lines)
         f.close()
         self.master.destroy()
         import signIn
-<<<<<<< HEAD
         signIn.main()
+        
     def userLoad(self):
         f=open("files\\users.txt","r",encoding="utf-8")
         lines=f.readlines()
@@ -44,8 +53,6 @@ class Home(Frame):
             content=line.split(";")
             if  (content[3]=="Logged"):
                 self.userButton.config(text=content[0])
-=======
->>>>>>> 587cec652cddedc2e36f8e72a774c561540ad88f
 
     def load_albums(self):
         f=open("files\\AlbumList.txt","r",encoding="utf-8")
@@ -92,8 +99,8 @@ class Home(Frame):
         self.tree.heading("User",text="User")
         self.tree.place(x=400,y=100)
         #Buttons
-        userButton=Button(self,text="User",font=11,width=20,height=2,bg="#D9D9D9")
-        userButton.place(x=101,y=21)
+        self.userButton=Button(self,text="User",font=11,width=20,height=2,bg="#D9D9D9")
+        self.userButton.place(x=101,y=21)
 
         myphotosButton=Button(self,text="My Albums",font=11,width=20,height=2,bg="#D9D9D9",command=self.myAlbums)
         myphotosButton.place(x=401,y=21)
@@ -134,10 +141,4 @@ def main():
     home_page = Home(master=home)
     home_page.pack(expand=True, fill="both")
     home.mainloop()
-<<<<<<< HEAD
-=======
 
-
-
->>>>>>> 587cec652cddedc2e36f8e72a774c561540ad88f
-main()
