@@ -33,6 +33,7 @@ def myAlbums():
 
 def logout():
     f=open("files\\users.txt", "r", encoding="utf-8")
+    f.close()
     lines = f.readlines()
     for i, line in enumerate(lines):
         content = line.split(";")
@@ -40,6 +41,7 @@ def logout():
         lines[i] = ";".join(content)
     f=open("files\\users.txt", "w", encoding="utf-8") 
     f.writelines(lines)
+    f.close()
     home.destroy()
     import signIn
 

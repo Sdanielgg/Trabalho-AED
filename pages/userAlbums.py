@@ -19,7 +19,6 @@ class UserAlbumPage(tk.Frame):
             content = line.strip().split(";")
             if (content[3] == "Logged"):
                 user = content[0]
-                print("hellooo")
                 return user
             
     def load_albums(self):
@@ -37,16 +36,17 @@ class UserAlbumPage(tk.Frame):
         selected = self.tree.selection()[0]
         currentItem = self.tree.focus()
         name = self.tree.item(currentItem, "values")[0]
-        file_path = "files\\AlbumList.txt"
-        f=open(file_path, "r", encoding="utf-8")
+        f=open("files\\AlbumList.txt", "r", encoding="utf-8")
         lines = f.readlines()
+        f.close()
         new_lines = []
         for line in lines:
             content = line.split(";")
             if content[0] != name:
                  new_lines.append(line)
-        f=open(file_path, "w", encoding="utf-8")
+        f=open("files\\AlbumList.txt", "w", encoding="utf-8")
         f.writelines(new_lines)
+        f.close()
         self.tree.delete(selected)
 
     def addAlbumPopUp(self):

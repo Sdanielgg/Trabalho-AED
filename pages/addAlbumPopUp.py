@@ -41,7 +41,6 @@ class addAlbumPopUp(Frame):
         Description=self.description.get()
         Category=self.value_inside.get()
         f = open("files\\AlbumList.txt", "r", encoding="utf-8")
-    
         lines = f.readlines()
         f.close()
         for line in lines:

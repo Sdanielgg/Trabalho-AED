@@ -1,2 +1,2 @@
 admin;admin;Admin;NotLogged;
-joao;ao;User;NotLogged;
+joao;ao;User;Logged;

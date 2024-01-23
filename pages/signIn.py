@@ -20,9 +20,9 @@ class SignIn(Frame):
         username = self.txt_username.get()
         password = self.txt_password.get()
 
-        f_users = open("files\\users.txt", "r", encoding="utf-8")
-        lines = f_users.readlines()
-        f_users.close()
+        f = open("files\\users.txt", "r", encoding="utf-8")
+        lines = f.readlines()
+        f.close()
 
         for i, line in enumerate(lines):
             content = line.split(";")
@@ -30,8 +30,9 @@ class SignIn(Frame):
                 content[3] = "Logged"
                 lines[i] = ";".join(content)
                 
-                f_users = open("files\\users.txt", "w", encoding="utf-8")
-                f_users.writelines(lines)
+                f = open("files\\users.txt", "w", encoding="utf-8")
+                f.writelines(lines)
+                f.close()
                 self.goToHome()
                 return
             
