@@ -106,6 +106,3 @@ def main():
     album.mainloop()
 
 
-
-main()
-

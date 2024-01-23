@@ -10,12 +10,14 @@ class Home(Frame):
 #Functions
     def myAlbums(self):
         self.master.destroy()
-        import userAlbums
+        import MyAlbums
+        MyAlbums.main()
 
     def logout(self):
         f=open("files\\users.txt", "r", encoding="utf-8")
-        f.close()
         lines = f.readlines()
+        f.close()
+        
         for i, line in enumerate(lines):
             content = line.split(";")
             content[3] = "NotLogged"
@@ -25,6 +27,7 @@ class Home(Frame):
         f.close()
         self.master.destroy()
         import signIn
+        signIn.main()
 
     def load_albums(self):
         f=open("files\\AlbumList.txt","r",encoding="utf-8")
@@ -53,6 +56,7 @@ class Home(Frame):
         f.close()
         self.master.destroy()
         import album
+        album.main()
 
 #Tree view de albums
     def create_widgets(self):
@@ -113,6 +117,3 @@ def main():
     home_page = Home(master=home)
     home_page.pack(expand=True, fill="both")
     home.mainloop()
-
-
-main()

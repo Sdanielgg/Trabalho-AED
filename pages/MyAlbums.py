@@ -57,9 +57,11 @@ class UserAlbumsPage(tk.Frame):
     def addAlbumPopUp(self):
         self.master.destroy()
         import addAlbumPopUp
+        addAlbumPopUp.main()
     def goToHome(self):
         self.master.destroy()
         import home
+        home.main()
     
     def create_widgets(self):
         #treeview
@@ -104,8 +106,3 @@ def main():
     user_album_page.pack(expand=True, fill="both")
 
     albums.mainloop()
-
-
-
-main()
-
