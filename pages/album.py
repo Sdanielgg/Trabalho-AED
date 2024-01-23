@@ -42,6 +42,8 @@ class Album(Frame):
     def home(self):
         self.master.destroy()
         import home
+        home.main()
+
     #window
     
     def create_widgets(self):
@@ -75,7 +77,10 @@ class Album(Frame):
 
         self.tree.column("PhotoName", width=300,anchor="center")
         self.tree.heading("PhotoName",text="Photo Name")
-        self.tree.place(x=500,y=100)
+        self.showPasswordIcon = Button(self, image=self.eyeIconHidden, width=20, height=20, command=self.toggle_password_visibility)
+        self.showPasswordIcon.place(x=500, y=70)
+
+
 def main():
     album = Tk()
     album.configure(bg="#27544C")

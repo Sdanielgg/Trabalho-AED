@@ -11,13 +11,20 @@ class Home(Frame):
 #Functions
     def myAlbums(self):
         self.master.destroy()
+<<<<<<< HEAD
         import myAlbumPhotos
         myAlbumPhotos.main()
+=======
+        import userAlbums
+>>>>>>> 587cec652cddedc2e36f8e72a774c561540ad88f
 
     def logout(self):
         f=open("files\\users.txt", "r", encoding="utf-8")
-        lines = f.readlines()
         f.close()
+<<<<<<< HEAD
+=======
+        lines = f.readlines()
+>>>>>>> 587cec652cddedc2e36f8e72a774c561540ad88f
         for i, line in enumerate(lines):
             content = line.split(";")
             content[3] = "NotLogged"
@@ -27,6 +34,7 @@ class Home(Frame):
         f.close()
         self.master.destroy()
         import signIn
+<<<<<<< HEAD
         signIn.main()
     def userLoad(self):
         f=open("files\\users.txt","r",encoding="utf-8")
@@ -36,6 +44,8 @@ class Home(Frame):
             content=line.split(";")
             if  (content[3]=="Logged"):
                 self.userButton.config(text=content[0])
+=======
+>>>>>>> 587cec652cddedc2e36f8e72a774c561540ad88f
 
     def load_albums(self):
         f=open("files\\AlbumList.txt","r",encoding="utf-8")
@@ -64,7 +74,6 @@ class Home(Frame):
         f.close()
         self.master.destroy()
         import album
-        album.main()
 
 #Tree view de albums
     def create_widgets(self):
@@ -83,8 +92,8 @@ class Home(Frame):
         self.tree.heading("User",text="User")
         self.tree.place(x=400,y=100)
         #Buttons
-        self.userButton=Button(self,text="User",font=11,width=20,height=2,bg="#D9D9D9")
-        self.userButton.place(x=101,y=21)
+        userButton=Button(self,text="User",font=11,width=20,height=2,bg="#D9D9D9")
+        userButton.place(x=101,y=21)
 
         myphotosButton=Button(self,text="My Albums",font=11,width=20,height=2,bg="#D9D9D9",command=self.myAlbums)
         myphotosButton.place(x=401,y=21)
@@ -125,4 +134,10 @@ def main():
     home_page = Home(master=home)
     home_page.pack(expand=True, fill="both")
     home.mainloop()
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> 587cec652cddedc2e36f8e72a774c561540ad88f
 main()
