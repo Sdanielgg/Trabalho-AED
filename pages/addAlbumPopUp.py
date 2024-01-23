@@ -48,7 +48,7 @@ class addAlbumPopUp(Frame):
             if (content[0]==AlbumName):
                 messagebox.showerror(title="Album Name in use",message="That Album Name is already in use, please choose another one!")
                 return
-        newLine= AlbumName+";"+Category +";"+Description+";"+user+";"+ "\n"
+        newLine= AlbumName+";"+Category +";"+Description+";"+user+";"+ "0"+";"+"\n"
         f = open("files\\AlbumList.txt", "a", encoding="utf-8")
         f.write(newLine)
         f.close()

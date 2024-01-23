@@ -1,4 +1,5 @@
-Ferias de natal;Events;Natal 2019;joao;ola;ola;ola
-asda;Sports;dasda;admin;
-OLA SOU O ADMIN;Nature;MINHA COLEÇÃO DE FOTOS;admin;
-Album das ferias;Sports;Minhas ferias na china;joao;
+Ferias de natal;Events;Natal 2019;joao;0;ola;ola
+asda;Sports;dasda;admin;0;
+OLA SOU O ADMIN;Nature;MINHA COLEÇÃO DE FOTOS;admin;0;
+Album das ferias;Sports;Minhas ferias na china;joao;0;
+Album test;Events;olaaa quantas coisas posso por aqui antes que bata na parede, parece que são muitas;joao;0;

@@ -4,7 +4,7 @@ import tkinter as tk
 from tkinter import messagebox
 
 
-class UserAlbumsPage(tk.Frame):
+class AlbumPhotos(tk.Frame):
     def __init__(self, master=None):
         super().__init__(master)
         self.master = master
@@ -89,21 +89,21 @@ class UserAlbumsPage(tk.Frame):
 
         
 def main():
-    albums = tk.Tk()
-    albums.configure(bg="#D9D9D9")
-    albums.title("My Albums")
+    album = tk.Tk()
+    album.configure(bg="#D9D9D9")
+    album.title("My Albums")
     appWidth = 1000
     appHeight = 600 
-    screenWidth = albums.winfo_screenwidth()
-    screenHeight = albums.winfo_screenheight()
+    screenWidth = album.winfo_screenwidth()
+    screenHeight = album.winfo_screenheight()
     x = (screenWidth/2) - (appWidth/2)
     y = (screenHeight/2) - (appHeight/2)
-    albums.geometry(f"{appWidth}x{appHeight}+{int(x)}+{int(y)}")
+    album.geometry(f"{appWidth}x{appHeight}+{int(x)}+{int(y)}")
 
-    user_album_page = UserAlbumsPage(master=albums)
+    user_album_page = AlbumPhotos(master=album)
     user_album_page.pack(expand=True, fill="both")
 
-    albums.mainloop()
+    album.mainloop()
 
 
 

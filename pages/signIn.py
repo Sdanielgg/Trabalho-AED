@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter import messagebox
 
+
 class SignIn(Frame):
     def __init__(self, master=None):
         super().__init__(master)
@@ -12,9 +13,12 @@ class SignIn(Frame):
     def goToHome(self):
         self.master.destroy()
         import home
+
     def goToSignUp(self):
         self.master.destroy()
         import signUp
+        signUp.main()
+
         
     def logIn(self):
         username = self.txt_username.get()
@@ -91,6 +95,5 @@ def main():
     user_signIn_page.pack(expand=True, fill="both")
 
     signIn.mainloop()
-
 
 main()

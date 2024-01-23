@@ -15,7 +15,7 @@ class ManageCategoriesPage(tk.Frame):
         self.tree.grid(row=0, column=0, padx=10, pady=10,rowspan=5, columnspan=2)
         style = ttk.Style()
         style.configure("Treeview", highlightthickness=0, font=('Calibri', 12)) 
-        style.configure("Treeview.Heading", font=('Comic Sans MS', 11)) 
+        style.configure("Treeview.Heading", font=('Comic Sans MS', 11))
         style.layout("Treeview", [('mystyle.Treeview.treearea', {'sticky': 'nswe'})]) 
         self.load_category("files\\categories.txt")
         self.delete_button = tk.Button(self, text='Delete Category',font=11,command=self.deleteSelected)

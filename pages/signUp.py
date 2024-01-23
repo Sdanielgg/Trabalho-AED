@@ -38,6 +38,8 @@ class SignUp(Frame):
     def signInOpen(self):
         self.up.destroy()
         import signIn
+        signIn.main()
+
 
     def create_widgets(self):
 
@@ -94,5 +96,5 @@ def main():
 
 
 
-main()
+
     

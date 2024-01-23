@@ -23,8 +23,11 @@ class Album(Frame):
             content = line.strip().split(";")
             if content[0] == albumname:
                 num_elements = len(content)-4
-                print(f"The number of elements in the 'content' list is: {num_elements}")
-
+                description=content[2]
+                description_str=str(description)
+                self.description_textbox.config(state='normal')
+                self.description_textbox.delete(1.0, 'end')
+                self.description_textbox.insert("insert",description_str)
                 for i in range(num_elements):
                     self.tree.insert('', 'end', values=(content[4 + i]))
                     
@@ -58,10 +61,8 @@ class Album(Frame):
         #Description
         description_Label=Label(self,text="Description",font=14)
         description_Label.place(x=10,y=100)
-        description_textbox = Text(self, font=('Calibri', 11),state='disabled',  width=40,height=10)
-        description_textbox.place(x=10, y=130)
-
-
+        self.description_textbox = Text(self, font=('Calibri', 11),state='disabled',  width=40,height=10)
+        self.description_textbox.place(x=10, y=130)
 
         #Tree view de albums
 

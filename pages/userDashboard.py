@@ -23,6 +23,7 @@ class User:
         frame = ttk.Frame(dashboard, borderwidth=200, relief="solid")
         frame.place(x=10, y=260, width=1420, height=625)
 
+        image=PhotoImage
         name = tk.Label(dashboard, text="User", font=('Arial', 35))
         name.place(x=250, y=130)
 
