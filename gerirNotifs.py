@@ -6,29 +6,14 @@ class NotificationManager:
         self.root = root
         self.root.title("Notification Manager")
 
-        self.users = ["User1", "User2", "User3"]
-
-        self.tree = ttk.Treeview(root, columns=("User", "Notification"), show="headings")
-        self.tree.heading("User", text="User")
-        self.tree.heading("Notification", text="Notification")
+        self.tree = ttk.Treeview(root, columns=("Notifications"), show="headings")
+        self.tree.heading("Notifications", text="Notifications")
+        self.tree.column("Notifications", width=350, anchor="center")
         self.tree.pack(side="left", padx=10, pady=10)
+        self.tree.place(x=50, y=50)
 
         user_frame = tk.Frame(root)
         user_frame.pack(side="right", padx=10, pady=10)
-
-        self.selected_user = tk.StringVar()
-        self.selected_user.set(self.users[0])
-        user_menu = tk.OptionMenu(user_frame, self.selected_user, *self.users)
-        user_menu.pack(pady=5)
-
-        self.notification_entry = tk.Entry(user_frame, width=40)
-        self.notification_entry.pack(pady=5)
-
-        notify_button = tk.Button(user_frame, text="Notify", command=self.notify_user)
-        notify_button.pack(pady=5)
-
-        add_album_button = tk.Button(user_frame, text="Add Album")
-        add_album_button.pack(pady=55)
 
     def notify_user(self):
         user = self.selected_user.get()
@@ -42,6 +27,7 @@ class NotificationManager:
 
 if __name__ == "__main__":
     root = tk.Tk()
-    root.geometry("800x600") 
+    root.geometry("450x300") 
     app = NotificationManager(root)
+    root.resizable(False, False)
     root.mainloop()
