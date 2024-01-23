@@ -9,11 +9,16 @@ class Album(Frame):
         self.master = master
         self.create_widgets()
         self.load_album()
+
     def load_album(self):
-        f=open("files\\AlbumList.txt")
-        albumname="Ferias de natal"
+        f=open("files\\Album.txt","r",encoding="utf-8")
+        lines=f.readlines()
+        albumname=lines[0]
+        f.close()
+        f=open("files\\AlbumList.txt","r",encoding="utf-8")
         lines=f.readlines()
         f.close
+        self.page_title.config(text=albumname)
         for line in lines:
             content = line.strip().split(";")
             if content[0] == albumname:
@@ -39,8 +44,8 @@ class Album(Frame):
     def create_widgets(self):
 
         #Page Title
-        page_title=Label(self,text="Album title",font=20)
-        page_title.place(x=500,y=10)
+        self.page_title=Label(self,text="Album title",font=20)
+        self.page_title.place(x=500,y=10)
 
         tree_title=Label(self,text="Photos",font=14)
         tree_title.place(x=600,y=60)
