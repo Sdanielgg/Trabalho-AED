@@ -13,8 +13,8 @@ class Home(Frame):
 #Functions
     def myAlbums(self):
         self.master.destroy()
-        import myAlbumPhotos
-        myAlbumPhotos.main()
+        import userAlbums
+        userAlbums.main()
     def loggedChecker(self):
         f=open("files\\users.txt","r",encoding="utf-8")
         lines=f.readlines()
@@ -81,6 +81,7 @@ class Home(Frame):
         f.close()
         self.master.destroy()
         import album
+        album.main()
 
 #Tree view de albums
     def create_widgets(self):

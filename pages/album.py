@@ -112,4 +112,4 @@ def main():
     user_album_page = Album(master=album)
     user_album_page.pack(expand=True, fill="both")
     album.mainloop()
-main()
+

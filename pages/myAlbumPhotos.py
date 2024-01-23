@@ -137,4 +137,3 @@ def main():
     user_album_page.pack(expand=True, fill="both")
 
     album.mainloop()
-main()

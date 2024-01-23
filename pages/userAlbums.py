@@ -96,7 +96,7 @@ class UserAlbumsPage(tk.Frame):
         addButton=tk.Button(self,text="Add Album",font=11,width=20,height=2,bg="#D9D9D9",command=self.addAlbumPopUp)
         addButton.place(x=110,y=320)
 
-        openButton=tk.Button(self,text="Open Album",font=11,width=20,height=2,bg="#D9D9D9")
+        openButton=tk.Button(self,text="Open Album",font=11,width=20,height=2,bg="#D9D9D9",command=self.open_Album)
         openButton.place(x=110,y=420) 
 
         
@@ -116,4 +116,3 @@ def main():
     user_album_page.pack(expand=True, fill="both")
 
     albums.mainloop()
-main()

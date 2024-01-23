@@ -11,8 +11,8 @@ class addPhotoPopUp(Frame):
         self.create_widgets()
     def goBack(self):
         self.master.destroy()
-        import MyAlbums
-        MyAlbums.main()
+        import myAlbumPhotos
+        myAlbumPhotos.main()
         
     def open_image(self):
         self.file_path = filedialog.askopenfilename(title="Select Image File", filetypes=[("Image files", "*.png;*.jpg;*.jpeg")])
@@ -110,4 +110,3 @@ def main():
     user_addPhoto_page.pack(expand=True, fill="both")
     photoPopUp.mainloop()
 
-main()
