@@ -1,8 +1,8 @@
-import tkinter as tk
+from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
 
-class ManageUsersPage(tk.Frame):
+class ManageUsersPage(Frame):
     def __init__(self, master=None):
         super().__init__(master)
         self.master = master
@@ -30,6 +30,10 @@ class ManageUsersPage(tk.Frame):
         f_users=open(file_path, "w", encoding="utf-8")
         f_users.writelines(new_lines)
         self.tree.delete(selected)
+    def goBack(self):
+        self.master.destroy()
+        import adminHome
+        adminHome.main()
 
     def create_widgets(self):
         self.tree = ttk.Treeview(self, selectmode="browse", columns=("Name","User Type"), show="headings", height=20)
@@ -43,11 +47,13 @@ class ManageUsersPage(tk.Frame):
         style.configure("Treeview.Heading" ,font=('Comic Sans MS', 11))
         style.layout("Treeview", [('mystyle.Treeview.treearea', {'sticky': 'nswe'})]) 
         self.load_users()
-        self.delete_button = tk.Button(self, text='Delete User',command=self.deleteSelected)
+        self.delete_button = Button(self, text='Delete User',command=self.deleteSelected)
         self.delete_button.grid(row=1, column=0, pady=10)
+        self.goBack=Button(self,text="Go back",command=self.goBack)
+        self.goBack.grid(row=2,column=0)
 
 def main():
-    root = tk.Tk()
+    root = Tk()
     root.title("User Management System")
     root.geometry("800x600") 
     ManageUsersPage(master=root)

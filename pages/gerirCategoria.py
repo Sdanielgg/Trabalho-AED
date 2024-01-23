@@ -1,8 +1,8 @@
-import tkinter as tk
+from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
 
-class ManageCategoriesPage(tk.Frame):
+class ManageCategoriesPage(Frame):
     def __init__(self, master=None):
         super().__init__(master)
         self.master = master
@@ -18,15 +18,21 @@ class ManageCategoriesPage(tk.Frame):
         style.configure("Treeview.Heading", font=('Comic Sans MS', 11))
         style.layout("Treeview", [('mystyle.Treeview.treearea', {'sticky': 'nswe'})]) 
         self.load_category("files\\categories.txt")
-        self.delete_button = tk.Button(self, text='Delete Category',font=11,command=self.deleteSelected)
+        self.delete_button = Button(self, text='Delete Category',font=11,command=self.deleteSelected)
         self.delete_button.grid(row=1, column=2, padx=10,pady=10)
-        self.delete_button = tk.Button(self, text='Add Category',font=11,command=self.Add_Category)
+        self.delete_button = Button(self, text='Add Category',font=11,command=self.Add_Category)
         self.delete_button.grid(row=1, column=3, pady=10)
-        self.category_label=tk.Label(self,text="New Category:",font=11)
+        self.category_label=Label(self,text="New Category:",font=11)
         self.category_label.grid(row=0,column=2)
-        self.category_entry=tk.Entry(self,width=25,font=11)
+        self.category_entry=Entry(self,width=25,font=11)
         self.category_entry.grid(row=0,column=3) 
+        self.goBack=Button(self,text="Go back",command=self.goBack)
+        self.goBack.grid(row=5,column=0)
 
+    def goBack(self):
+        self.master.destroy()
+        import adminHome
+        adminHome.main()
     def load_category(self,file_path):
          f=open(file_path, 'r', encoding='utf-8')
          for line in f:
@@ -70,7 +76,7 @@ class ManageCategoriesPage(tk.Frame):
 
 
 def main():
-    root = tk.Tk()
+    root = Tk()
     root.title("Category Management System")
     root.geometry("800x600") 
     ManageCategoriesPage(master=root)
