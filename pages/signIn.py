@@ -13,13 +13,17 @@ class SignIn(Frame):
     def goToHome(self):
         self.master.destroy()
         import home
+        home.main()
 
     def goToSignUp(self):
         self.master.destroy()
         import signUp
         signUp.main()
-
-        
+    def adminSignIn(self):
+        self.master.destroy()
+        import adminHome
+        adminHome.main()
+    
     def logIn(self):
         username = self.txt_username.get()
         password = self.txt_password.get()
@@ -30,10 +34,11 @@ class SignIn(Frame):
 
         for i, line in enumerate(lines):
             content = line.split(";")
-            if (content[0] == username and content[1] == password):
+            if (content[0]==username and content[1]==password and content[2]=="Admin"):
+                self.adminSignIn()
+            if (content[0] == username and content[1] == password and content[2]=="User"):
                 content[3] = "Logged"
                 lines[i] = ";".join(content)
-                
                 f = open("files\\users.txt", "w", encoding="utf-8")
                 f.writelines(lines)
                 f.close()
@@ -95,5 +100,3 @@ def main():
     user_signIn_page.pack(expand=True, fill="both")
 
     signIn.mainloop()
-
-main()

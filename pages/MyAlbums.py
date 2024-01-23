@@ -4,7 +4,7 @@ import tkinter as tk
 from tkinter import messagebox
 
 
-class AlbumPhotos(tk.Frame):
+class UserAlbumsPage(tk.Frame):
     def __init__(self, master=None):
         super().__init__(master)
         self.master = master
@@ -57,9 +57,11 @@ class AlbumPhotos(tk.Frame):
     def addAlbumPopUp(self):
         self.master.destroy()
         import addAlbumPopUp
+        addAlbumPopUp.main()
     def goToHome(self):
         self.master.destroy()
         import home
+        home.main()
     
     def create_widgets(self):
         #treeview
@@ -89,20 +91,18 @@ class AlbumPhotos(tk.Frame):
 
         
 def main():
-    album = tk.Tk()
-    album.configure(bg="#D9D9D9")
-    album.title("My Albums")
+    albums = tk.Tk()
+    albums.configure(bg="#D9D9D9")
+    albums.title("My Albums")
     appWidth = 1000
     appHeight = 600 
-    screenWidth = album.winfo_screenwidth()
-    screenHeight = album.winfo_screenheight()
+    screenWidth = albums.winfo_screenwidth()
+    screenHeight = albums.winfo_screenheight()
     x = (screenWidth/2) - (appWidth/2)
     y = (screenHeight/2) - (appHeight/2)
-    album.geometry(f"{appWidth}x{appHeight}+{int(x)}+{int(y)}")
+    albums.geometry(f"{appWidth}x{appHeight}+{int(x)}+{int(y)}")
 
-    user_album_page = AlbumPhotos(master=album)
+    user_album_page = UserAlbumsPage(master=albums)
     user_album_page.pack(expand=True, fill="both")
 
-    album.mainloop()
-
-
+    albums.mainloop()

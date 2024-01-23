@@ -23,6 +23,7 @@ class addAlbumPopUp(Frame):
     def goBack(self):
         self.master.destroy()
         import userAlbums
+        userAlbums.main()
 
     def load_categories(self):
         categories = []
@@ -101,4 +102,4 @@ def main():
     user_addAlbum_page.pack(expand=True, fill="both")
 
     addAlbum.mainloop()
-main()
+
